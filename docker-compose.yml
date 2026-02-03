@@ -1,0 +1,78 @@
+services:
+  backend:
+  # Backend:Creates the backend service running FastAPI
+    container_name: soc-backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - /app/.venv # To avoid mounting local .venv, see: https://github.com/astral-sh/uv/issues/8342#issuecomment-2529780192 | IDK why this is necessary, but it works
+    command:
+      - fastapi
+      - run
+      - --reload
+      - "app/main.py"
+
+  mailpit:
+  # Optional: Mailpit service for email testing
+      image: axllent/mailpit
+      container_name: soc-mailpit-server
+      restart: unless-stopped
+      volumes:
+          - ./svc_data/mailpit_data:/data
+      ports:
+          - 8025:8025
+          - 1025:1025
+      environment:
+          MP_MAX_MESSAGES: 5000
+          MP_DATABASE: /data/mailpit.db
+          MP_SMTP_AUTH_ACCEPT_ANY: 1
+          MP_SMTP_AUTH_ALLOW_INSECURE: 1
+  redis:
+  # Redis: Redis DB for caching, and queuing tasks
+      image: redis:latest
+      container_name: soc-redis
+      restart: always
+      volumes:
+          - redis-data:/data
+      ports:
+          - "6379:6379"
+      command:
+          - redis-server
+          - --save 20 1
+          - --loglevel warning
+          - --requirepass password123
+  postgres:
+  # Postgres: PostgreSQL database service
+      image: postgres:latest
+      container_name: soc-postgres
+      restart: always
+      ports:
+          - "5432:5432"
+      # TODO: Change these credentials before deploying to production
+      environment:
+        POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
+        POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+        POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
+      volumes:
+        - ./svc_data/postgres_data:/var/lib/postgresql # See breaking change on PR https://github.com/docker-library/postgres/pull/1259
+  pgweb:
+  # Pgweb: Web-based PostgreSQL database browser
+    container_name: soc-pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - 8081:8081
+    links:
+      - postgres:postgres
+    environment:
+      - PGWEB_DATABASE_URL=postgres://username:password@postgres:5432/default_database?sslmode=disable
+    depends_on:
+      - postgres
+
+volumes:
+  redis-data:
+    driver: local
