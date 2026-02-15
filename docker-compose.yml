@@ -15,6 +15,26 @@ services:
       - run
       - --reload
       - "app/main.py"
+    environment:
+      REDIS_DSN: "redis://:password123@redis"
+
+  worker:
+  # Worker: contains the celery worker
+    container_name: soc-worker
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    volumes:
+      - ./backend:/app
+      - /app/.venv # See above comment
+    working_dir: /app
+    command:
+      - celery
+      - --app
+      - app.worker:app
+      - worker
+    environment:
+      REDIS_DSN: "redis://:password123@redis"
 
   mailpit:
   # Optional: Mailpit service for email testing
