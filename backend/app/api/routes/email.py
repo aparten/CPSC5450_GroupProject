@@ -53,6 +53,7 @@ async def parse_email(file: UploadFile = File(...)):
     try:
         payload = parse_and_validate(eml_bytes, email_id=event_id)
     except ValidationError as e:
+        # Keep the raw email for debugging, but return validation error
         raise HTTPException(422, f"Schema validation failed: {e.message}")
 
     return {
