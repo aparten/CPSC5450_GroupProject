@@ -8,8 +8,11 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      - ./backend:/app/backend
       - /app/.venv # To avoid mounting local .venv, see: https://github.com/astral-sh/uv/issues/8342#issuecomment-2529780192 | IDK why this is necessary, but it works
+      - email-data:/app/email_data # Mounting email data for persistence
+
+    working_dir: /app/backend
     command:
       - fastapi
       - run
@@ -25,9 +28,10 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     volumes:
-      - ./backend:/app
+      - ./backend:/app/backend
       - /app/.venv # See above comment
-    working_dir: /app
+      - email-data:/app/email_data # Mounting email data for persistence
+    working_dir: /app/backend
     command:
       - celery
       - --app
@@ -78,7 +82,8 @@ services:
         POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
         POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
       volumes:
-        - ./svc_data/postgres_data:/var/lib/postgresql # See breaking change on PR https://github.com/docker-library/postgres/pull/1259
+        - postgres-data:/var/lib/postgresql # See breaking change on PR https://github.com/docker-library/postgres/pull/1259
+        - ./svc_data/postgres_init:/docker-entrypoint-initdb.d:ro # Mounting initialization scripts for PostgreSQL
   pgweb:
   # Pgweb: Web-based PostgreSQL database browser
     container_name: soc-pgweb
@@ -86,8 +91,6 @@ services:
     image: sosedoff/pgweb
     ports:
       - 8081:8081
-    links:
-      - postgres:postgres
     environment:
       - PGWEB_DATABASE_URL=postgres://username:password@postgres:5432/default_database?sslmode=disable
     depends_on:
@@ -95,4 +98,8 @@ services:
 
 volumes:
   redis-data:
+    driver: local
+  email-data:
+    driver: local
+  postgres-data:
     driver: local

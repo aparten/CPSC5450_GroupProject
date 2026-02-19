@@ -1,69 +1,164 @@
 {
-  "email_id": "string",
-  "source": {
-    "dataset": "string",
-    "split": "train|val|test"
-  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Parsed Email Schema",
+  "type": "object",
 
-  "headers": {
-    "from_address": "string",
-    "from_display_name": "string|null",
-    "reply_to": "string|null",
-    "return_path": "string|null",
-    "to_address": "string|null",
-    "subject": "string|null",
-    "date": "ISO-8601 string|null",
-    "message_id": "string|null",
+  "properties": {
+    "email_id": { "type": "string" },
+    "fingerprint": { "type": "string" },
 
-    "auth_results": {
-      "spf": "pass|fail|softfail|neutral|none|null",
-      "dkim": "pass|fail|none|null",
-      "dmarc": "pass|fail|none|null"
+    "source": {
+      "type": "object",
+      "properties": {
+        "dataset": { "type": "string" },
+        "split": {
+          "type": ["string", "null"],
+          "enum": ["train", "val", "test", null]
+        }
+      },
+      "required": ["dataset", "split"]
+    },
+
+    "headers": {
+      "type": "object",
+      "properties": {
+        "from_address": { "type": "string" },
+        "from_display_name": { "type": ["string", "null"] },
+        "reply_to": { "type": ["string", "null"] },
+        "return_path": { "type": ["string", "null"] },
+        "to_address": { "type": ["string", "null"] },
+        "subject": { "type": ["string", "null"] },
+        "date": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "message_id": { "type": ["string", "null"] },
+
+        "auth_results": {
+          "type": "object",
+          "properties": {
+            "spf": {
+              "type": ["string", "null"],
+              "enum": ["pass", "fail", "softfail", "neutral", "none", null]
+            },
+            "dkim": {
+              "type": ["string", "null"],
+              "enum": ["pass", "fail", "none", null]
+            },
+            "dmarc": {
+              "type": ["string", "null"],
+              "enum": ["pass", "fail", "none", null]
+            }
+          },
+          "required": ["spf", "dkim", "dmarc"]
+        }
+      },
+      "required": [
+        "from_address",
+        "from_display_name",
+        "reply_to",
+        "return_path",
+        "to_address",
+        "subject",
+        "date",
+        "message_id",
+        "auth_results"
+      ]
+    },
+
+    "body": {
+      "type": "object",
+      "properties": {
+        "has_html": { "type": "boolean" },
+        "plain_text": { "type": ["string", "null"] },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "filename": { "type": "string" },
+              "file_ext": { "type": ["string", "null"] }
+            },
+            "required": ["filename", "file_ext"]
+          }
+        }
+      },
+      "required": ["has_html", "plain_text", "attachments"]
+    },
+
+    "indicators": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "urls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "url_actual": { "type": "string" },
+              "url_display_text": { "type": ["string", "null"] },
+              "domain": { "type": "string" }
+            },
+            "required": ["url_actual", "url_display_text", "domain"]
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ip_addresses": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["urls", "domains", "ip_addresses"]
+    },
+
+    "derived_flags": {
+      "type": "object",
+      "properties": {
+        "display_name_mismatch": { "type": "boolean" },
+        "sender_domain_mismatch": { "type": "boolean" },
+        "lookalike_domain_detected": { "type": "boolean" },
+        "internal_impersonation": { "type": "boolean" },
+        "unicode_trick_detected": { "type": "boolean" }
+      },
+      "required": [
+        "display_name_mismatch",
+        "sender_domain_mismatch",
+        "lookalike_domain_detected",
+        "internal_impersonation",
+        "unicode_trick_detected"
+      ]
+    },
+
+    "keyword_counts": {
+      "type": "object",
+      "properties": {
+        "urgency": { "type": ["integer", "null"] },
+        "credentials": { "type": ["integer", "null"] },
+        "payment": { "type": ["integer", "null"] },
+        "threat": { "type": ["integer", "null"] }
+      },
+      "required": ["urgency", "credentials", "payment", "threat"]
+    },
+
+    "label": {
+      "type": ["string", "null"],
+      "enum": ["phishing", "suspicious", "benign", null]
     }
   },
 
-  "body": {
-    "has_html": true,
-    "plain_text": "string|null",
-    "attachments": [
-      {
-        "filename": "string",
-        "file_ext": "string|null"
-      }
-    ]
-  },
-
-  "indicators": {
-    "urls": [
-      {
-        "url_actual": "string",
-        "url_display_text": "string|null",
-        "domain": "string",
-        "tld": "string|null",
-        "is_shortener": false,
-        "has_mismatched_anchor": true,
-        "punycode_domain": "string|null",
-        "unicode_suspicious": false
-      }
-    ],
-    "domains": ["string"],
-    "ip_addresses": ["string"]
-  },
-
-  "derived_flags": {
-    "display_name_mismatch": true,
-    "sender_domain_mismatch": true,
-    "lookalike_domain_detected": false,
-    "internal_impersonation": false,
-    "unicode_trick_detected": false
-  },
-
-  "keyword_counts": {
-    "urgency": 0,
-    "credentials": 0,
-    "payment": 0,
-    "threat": 0
-  },
-
-  "label": "phishing|suspicious|benign|null"
+  "required": [
+    "email_id",
+    "fingerprint",
+    "source",
+    "headers",
+    "body",
+    "indicators",
+    "derived_flags",
+    "keyword_counts",
+    "label"
+  ]
 }
