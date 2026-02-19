@@ -7,6 +7,8 @@ from app.services.email_processing import parse_and_validate
 
 router = APIRouter(prefix="/email", tags=["email"])
 
+RAW_DIR = Path("/app/email_data/raw")
+
 def _validate_upload(file: UploadFile, eml_bytes: bytes) -> None:
     if not file.filename or not isinstance(file.filename, str):
         raise HTTPException(400, "Uploaded file has no filename")
@@ -51,6 +53,7 @@ async def parse_email(file: UploadFile = File(...)):
     try:
         payload = parse_and_validate(eml_bytes, email_id=event_id)
     except ValidationError as e:
+        # Keep the raw email for debugging, but return validation error
         raise HTTPException(422, f"Schema validation failed: {e.message}")
 
     return {
