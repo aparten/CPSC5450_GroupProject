@@ -6,6 +6,10 @@ import uuid
 
 from app.services.email_storage import save_raw_eml
 from app.services.email_processing import parse_and_validate
+from app.tasks.email_tasks import parse_inbox_email
+
+from fastapi import APIRouter
+from app.tasks.email_tasks import scan_inbox_and_enqueue
 
 router = APIRouter(prefix="/email", tags=["email"])
 
@@ -39,6 +43,11 @@ async def ingest_email(file: UploadFile = File(...)):
         "raw_path": str(raw_path),
         "status": "queued"
     }
+
+@router.post("/ingest/inbox")
+def ingest_inbox(limit: int = 50):
+    job = scan_inbox_and_enqueue.delay(limit=limit)
+    return {"status": "queued", "task_id": job.id, "limit": limit}
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):

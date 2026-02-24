@@ -10,7 +10,7 @@ services:
     volumes:
       - ./backend:/app/backend
       - /app/.venv # To avoid mounting local .venv, see: https://github.com/astral-sh/uv/issues/8342#issuecomment-2529780192 | IDK why this is necessary, but it works
-      - email-data:/app/email_data # Mounting email data for persistence
+      - ./backend/app/email_data:/app/email_data/ # Mounting input directory for email ingestion, put files in this folder to have them ingested by the system, this will be modified if we move to mailpit
 
     working_dir: /app/backend
     command:
@@ -30,15 +30,17 @@ services:
     volumes:
       - ./backend:/app/backend
       - /app/.venv # See above comment
-      - email-data:/app/email_data # Mounting email data for persistence
+      - ./backend/app/email_data:/app/email_data/ # Mounting input directory for email ingestion, put files in this folder to have them ingested by the system, this will be modified if we move to mailpit
     working_dir: /app/backend
     command:
       - celery
       - --app
-      - app.worker:app
+      - app.tasks.worker:app
       - worker
     environment:
       REDIS_DSN: "redis://:password123@redis"
+    depends_on:
+      - redis
 
   mailpit:
   # Optional: Mailpit service for email testing
