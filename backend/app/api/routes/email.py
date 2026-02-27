@@ -14,6 +14,7 @@ from app.tasks.email_tasks import scan_inbox_and_enqueue
 router = APIRouter(prefix="/email", tags=["email"])
 
 RAW_DIR = Path("/app/email_data/raw")
+INBOX_DIR = Path("/app/email_data/ingest_input")
 
 def _validate_upload(file: UploadFile, eml_bytes: bytes) -> None:
     if not file.filename or not isinstance(file.filename, str):
@@ -48,6 +49,24 @@ async def ingest_email(file: UploadFile = File(...)):
 def ingest_inbox(limit: int = 50):
     job = scan_inbox_and_enqueue.delay(limit=limit)
     return {"status": "queued", "task_id": job.id, "limit": limit}
+
+# Endpoint to add an email to INBOX_DIR
+@router.post("/add_email")
+def add_email(file: UploadFile = File(...)):
+    eml_bytes = file.file.read()
+    _validate_upload(file, eml_bytes)
+
+    filename = f"{file.filename}.eml"
+    file_path = INBOX_DIR / filename
+
+    try:
+        with open(file_path, "wb") as f:
+            f.write(eml_bytes)
+    except Exception as e:
+        raise HTTPException(500, f"Failed to save email to inbox: {e}")
+
+    return {"status": "success", "file_path": str(file_path)}
+
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):
