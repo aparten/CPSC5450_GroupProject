@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 from app.core.config import settings
+from app.core.db import init_db
 from starlette.middleware.cors import CORSMiddleware
 from app.api.main import api_router
 from app.tasks.worker import app as celery_app
@@ -21,6 +22,11 @@ if settings.all_cors_origins:
     )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+
+@app.on_event("startup")
+def on_startup() -> None:
+    init_db()
 
 
 @app.get("/")

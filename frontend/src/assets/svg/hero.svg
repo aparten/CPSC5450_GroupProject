@@ -1,0 +1,197 @@
+<!-- Hero SVG: Secure AI SOC Email Triage (transparent-friendly) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Secure AI SOC Email Triage Illustration</title>
+  <desc id="desc">Shield over an email with connected nodes and alert indicator representing phishing triage, extraction, and human approval workflow.</desc>
+
+  <defs>
+    <!-- Background gradient (set opacity to 0 if you want fully transparent) -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1220" stop-opacity="1"/>
+      <stop offset="1" stop-color="#111C34" stop-opacity="1"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+
+    <linearGradient id="accentSoft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0.18"/>
+    </linearGradient>
+
+    <linearGradient id="warn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EF4444"/>
+    </linearGradient>
+
+    <!-- Soft glow -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.55 0" result="c"/>
+      <feMerge>
+        <feMergeNode in="c"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#9CA3AF" stroke-opacity="0.08" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="#9CA3AF" fill-opacity="0.12"/>
+    </pattern>
+
+    <!-- Rounded clipping for a tidy hero card -->
+    <clipPath id="round">
+      <rect x="30" y="30" width="1140" height="540" rx="28"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <g clip-path="url(#round)">
+    <rect x="30" y="30" width="1140" height="540" rx="28" fill="url(#bg)"/>
+    <rect x="30" y="30" width="1140" height="540" rx="28" fill="url(#grid)"/>
+
+    <!-- Ambient blobs -->
+    <circle cx="220" cy="120" r="150" fill="url(#accentSoft)"/>
+    <circle cx="1040" cy="480" r="190" fill="url(#accentSoft)"/>
+    <circle cx="920" cy="140" r="120" fill="#22D3EE" fill-opacity="0.08"/>
+  </g>
+
+  <!-- Connecting network lines -->
+  <g clip-path="url(#round)" opacity="0.9">
+    <path d="M230 400 C 360 330, 420 310, 520 300 S 720 280, 820 230 S 980 180, 1040 160"
+          fill="none" stroke="#A78BFA" stroke-opacity="0.25" stroke-width="2"/>
+    <path d="M190 210 C 320 240, 420 260, 520 300 S 740 380, 870 400 S 1010 420, 1080 470"
+          fill="none" stroke="#22D3EE" stroke-opacity="0.18" stroke-width="2"/>
+    <path d="M340 110 C 430 160, 500 220, 560 280"
+          fill="none" stroke="#94A3B8" stroke-opacity="0.18" stroke-width="2" stroke-dasharray="6 10"/>
+  </g>
+
+  <!-- Nodes -->
+  <g clip-path="url(#round)">
+    <!-- left cluster -->
+    <circle cx="190" cy="210" r="6" fill="#22D3EE"/>
+    <circle cx="230" cy="400" r="7" fill="#A78BFA"/>
+    <circle cx="340" cy="110" r="6" fill="#94A3B8"/>
+    <circle cx="520" cy="300" r="8" fill="url(#accent)" filter="url(#glow)"/>
+
+    <!-- right cluster -->
+    <circle cx="820" cy="230" r="7" fill="#A78BFA"/>
+    <circle cx="870" cy="400" r="6" fill="#22D3EE"/>
+    <circle cx="1040" cy="160" r="7" fill="url(#accent)"/>
+    <circle cx="1080" cy="470" r="6" fill="#94A3B8"/>
+  </g>
+
+  <!-- Main illustration group -->
+  <g clip-path="url(#round)">
+    <!-- Shadow base -->
+    <ellipse cx="610" cy="430" rx="230" ry="34" fill="#000" opacity="0.25"/>
+
+    <!-- Email card (inbox item) -->
+    <g transform="translate(360 215)">
+      <rect x="0" y="0" width="500" height="260" rx="22" fill="#0F172A" stroke="#334155" stroke-opacity="0.6"/>
+      <rect x="26" y="26" width="448" height="42" rx="12" fill="#111C34" stroke="#334155" stroke-opacity="0.4"/>
+      <rect x="26" y="86" width="320" height="16" rx="8" fill="#94A3B8" opacity="0.35"/>
+      <rect x="26" y="116" width="410" height="16" rx="8" fill="#94A3B8" opacity="0.25"/>
+      <rect x="26" y="146" width="380" height="16" rx="8" fill="#94A3B8" opacity="0.20"/>
+      <rect x="26" y="196" width="180" height="40" rx="14" fill="url(#accentSoft)" stroke="#22D3EE" stroke-opacity="0.35"/>
+      <rect x="220" y="196" width="190" height="40" rx="14" fill="#111C34" stroke="#A78BFA" stroke-opacity="0.35"/>
+      <rect x="420" y="196" width="54" height="40" rx="14" fill="#111C34" stroke="#334155" stroke-opacity="0.6"/>
+
+      <!-- Envelope icon -->
+      <g transform="translate(42 34)">
+        <rect x="0" y="0" width="44" height="30" rx="7" fill="#0B1220" stroke="#475569" stroke-opacity="0.8"/>
+        <path d="M4 6 L22 18 L40 6" fill="none" stroke="#22D3EE" stroke-opacity="0.85" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 24 L16 14" fill="none" stroke="#A78BFA" stroke-opacity="0.6" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M40 24 L28 14" fill="none" stroke="#A78BFA" stroke-opacity="0.6" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- Shield (secure agent) -->
+    <g transform="translate(560 125)" filter="url(#glow)">
+      <path d="M50 0
+               C 78 12, 108 16, 140 18
+               V 78
+               C 140 128, 103 165, 70 188
+               C 36 165, 0 128, 0 78
+               V 18
+               C 20 16, 34 12, 50 0 Z"
+            fill="#0B1220" stroke="url(#accent)" stroke-width="3" opacity="0.98"/>
+      <path d="M50 18
+               C 73 28, 98 32, 126 34
+               V 76
+               C 126 118, 95 148, 70 166
+               C 43 148, 14 118, 14 76
+               V 34
+               C 28 32, 39 28, 50 18 Z"
+            fill="url(#accentSoft)" stroke="#22D3EE" stroke-opacity="0.25" stroke-width="2"/>
+
+      <!-- Checkmark -->
+      <path d="M40 92 L61 114 L104 70"
+            fill="none" stroke="#22D3EE" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- “AI” node cluster behind shield -->
+    <g transform="translate(540 92)" opacity="0.95">
+      <circle cx="40" cy="60" r="7" fill="#A78BFA"/>
+      <circle cx="130" cy="50" r="7" fill="#22D3EE"/>
+      <circle cx="165" cy="120" r="6" fill="#94A3B8"/>
+      <circle cx="70" cy="150" r="6" fill="#94A3B8"/>
+      <path d="M40 60 L130 50 L165 120 L70 150 Z" fill="none" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="2"/>
+      <path d="M40 60 L70 150" fill="none" stroke="#A78BFA" stroke-opacity="0.22" stroke-width="2"/>
+    </g>
+
+    <!-- Warning / phishing indicator -->
+    <g transform="translate(890 230)">
+      <path d="M72 0 L144 126 H0 Z" fill="#0B1220" stroke="url(#warn)" stroke-width="3" opacity="0.98"/>
+      <path d="M72 40 V84" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="72" cy="104" r="6.5" fill="#F59E0B"/>
+      <circle cx="24" cy="126" r="6" fill="#EF4444" opacity="0.75"/>
+      <circle cx="144" cy="126" r="6" fill="#F59E0B" opacity="0.75"/>
+    </g>
+
+    <!-- Human approval “badge” -->
+    <g transform="translate(275 360)">
+      <rect x="0" y="0" width="150" height="70" rx="18" fill="#0F172A" stroke="#334155" stroke-opacity="0.7"/>
+      <circle cx="38" cy="35" r="18" fill="url(#accentSoft)" stroke="#22D3EE" stroke-opacity="0.5"/>
+      <path d="M32 35 C32 29, 44 29, 44 35 C44 41, 32 41, 32 35 Z" fill="#22D3EE" opacity="0.85"/>
+      <path d="M26 55 C30 46, 46 46, 50 55" fill="none" stroke="#94A3B8" stroke-opacity="0.7" stroke-width="3" stroke-linecap="round"/>
+      <path d="M86 38 L100 52 L128 24" fill="none" stroke="#22D3EE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Data/indicator extraction “stack” -->
+    <g transform="translate(235 190)">
+      <rect x="0" y="0" width="170" height="108" rx="18" fill="#0F172A" stroke="#334155" stroke-opacity="0.7"/>
+      <path d="M22 36 C 52 10, 118 10, 148 36
+               C 118 62, 52 62, 22 36 Z"
+            fill="#111C34" stroke="#A78BFA" stroke-opacity="0.5"/>
+      <path d="M22 56 C 52 30, 118 30, 148 56
+               C 118 82, 52 82, 22 56 Z"
+            fill="#0B1220" stroke="#22D3EE" stroke-opacity="0.35"/>
+      <path d="M22 76 C 52 50, 118 50, 148 76
+               C 118 102, 52 102, 22 76 Z"
+            fill="#111C34" stroke="#94A3B8" stroke-opacity="0.25"/>
+    </g>
+
+    <!-- Linking arrows (workflow) -->
+    <g opacity="0.9">
+      <path d="M420 250 C 470 215, 505 195, 555 182" fill="none" stroke="#22D3EE" stroke-opacity="0.55" stroke-width="3"/>
+      <path d="M555 182 L545 178 L549 189 Z" fill="#22D3EE" opacity="0.75"/>
+
+      <path d="M735 185 C 800 190, 860 205, 905 240" fill="none" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="3"/>
+      <path d="M905 240 L897 231 L894 243 Z" fill="#A78BFA" opacity="0.75"/>
+
+      <path d="M425 405 C 480 420, 520 425, 585 426" fill="none" stroke="#94A3B8" stroke-opacity="0.38" stroke-width="3"/>
+      <path d="M585 426 L574 420 L574 432 Z" fill="#94A3B8" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- Outer border -->
+  <rect x="30" y="30" width="1140" height="540" rx="28" fill="none" stroke="#334155" stroke-opacity="0.55"/>
+</svg>
