@@ -1,4 +1,29 @@
 services:
+  frontend:
+  # Frontend: Vite/TanStack Start frontend dev server
+    container_name: soc-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command:
+      - npm
+      - run
+      - dev
+      - --
+      - --host
+      - 0.0.0.0
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend
+
   backend:
   # Backend:Creates the backend service running FastAPI
     container_name: soc-backend
@@ -20,6 +45,13 @@ services:
       - "app/main.py"
     environment:
       REDIS_DSN: "redis://:password123@redis"
+      POSTGRES_DSN: "postgresql://username:password@postgres:5432/default_database"
+      FRONTEND_HOST: "http://localhost:3000"
+    depends_on: # ref: https://docs.docker.com/compose/how-tos/startup-order/
+      postgres:
+        condition: service_healthy
+        restart: true
+
 
   worker:
   # Worker: contains the celery worker
@@ -76,6 +108,11 @@ services:
       restart: always
       ports:
           - "5432:5432"
+      healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U username -d default_database"]
+          interval: 10s
+          timeout: 5s
+          retries: 5
       # TODO: Change these credentials before deploying to production
       environment:
         POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
