@@ -1,60 +1,54 @@
 # app/tasks/email_tasks.py
 from __future__ import annotations
-import uuid
-from jsonschema import ValidationError
-from .worker import app
+
+from uuid import UUID
+from sqlmodel import Session
+
+from app.tasks.worker import app
+from app.core.db import engine
+from app import crud
+from app.models.email import EmailStatus
+from pathlib import Path
 
 from app.services.email_processing import parse_and_validate
 from app.services.email_filesystem import (
-    list_inbox_eml,
-    claim_inbox_file,
     read_processing_eml,
     write_parsed_json,
     write_error,
     archive_raw_success,
 )
-from app.services.job_status import set_status
+from app.services.job_status import set_status  # if you're still using this
 
-@app.task(name="scan_inbox_and_enqueue")
-def scan_inbox_and_enqueue(limit: int = 50) -> dict:
-    files = list_inbox_eml()[:limit]
-    enqueued = 0
 
-    for filename in files:
-        event_id = str(uuid.uuid4())
-        # enqueue parse job for each file
-        parse_inbox_email.delay(event_id, filename)
-        enqueued += 1
+@app.task(bind=True, name="app.tasks.email_tasks.parse_inbox_email")
+def parse_inbox_email(self, event_id: str, processing_path: str) -> dict:
+    event_uuid = UUID(event_id)
 
-    return {"found": len(files), "enqueued": enqueued}
+    # optional: status tracking
+    set_status(event_id, "processing", {"processing_path": processing_path})
 
-@app.task(bind=True, name="parse_inbox_email")
-def parse_inbox_email(self, event_id: str, filename: str) -> dict:
-    set_status(event_id, "processing", {"filename": filename})
+    with Session(engine) as session:
+        try:
+            crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.processing)
 
-    try:
-        processing_path = claim_inbox_file(filename, event_id)
-        eml_bytes = read_processing_eml(processing_path)
+            eml_bytes = read_processing_eml(Path(processing_path))
+            payload = parse_and_validate(eml_bytes, email_id=event_id)
 
-        payload = parse_and_validate(eml_bytes, email_id=event_id)
-        out_path = write_parsed_json(event_id, payload)
+            # 1) Write parsed JSON to filesystem (you already have this working)
+            out_path = write_parsed_json(event_id, payload)
 
-        archive_path = archive_raw_success(processing_path)
-        set_status(event_id, "done", {"parsed_path": str(out_path), "raw_path": str(archive_path)})
+            # 2) Write parsed result to DB (THIS is what you want)
+            crud.upsert_email_parsed(session, event_id=event_uuid, payload=payload)
 
-        return {"event_id": event_id, "parsed_path": str(out_path), "raw_path": str(archive_path)}
+            # 3) Mark done, archive raw
+            archive_raw_success(Path(processing_path))
+            crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.done)
 
-    except FileNotFoundError as e:
-        # Somebody else already claimed it, or it was removed
-        set_status(event_id, "skipped", {"filename": filename, "reason": str(e)})
-        return {"event_id": event_id, "skipped": True, "reason": str(e)}
+            set_status(event_id, "done", {"parsed_path": str(out_path)})
+            return {"event_id": event_id, "parsed_path": str(out_path)}
 
-    except ValidationError as e:
-        err_path = write_error(event_id, f"Schema validation failed: {e.message}")
-        set_status(event_id, "failed", {"filename": filename, "error": e.message, "error_path": str(err_path)})
-        raise
-
-    except Exception as e:
-        err_path = write_error(event_id, f"Unhandled error: {e}")
-        set_status(event_id, "failed", {"filename": filename, "error": str(e), "error_path": str(err_path)})
-        raise
+        except Exception as e:
+            write_error(event_id, f"Unhandled error: {e}")
+            crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.failed, error=str(e))
+            set_status(event_id, "failed", {"error": str(e)})
+            raise

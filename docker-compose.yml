@@ -71,8 +71,10 @@ services:
       - worker
     environment:
       REDIS_DSN: "redis://:password123@redis"
+      POSTGRES_DSN: "postgresql://username:password@postgres:5432/default_database"
     depends_on:
       - redis
+      - postgres
 
   mailpit:
   # Optional: Mailpit service for email testing

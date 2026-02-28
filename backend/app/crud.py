@@ -1,11 +1,26 @@
+from __future__ import annotations
+
 import uuid
-from typing import Any
+from uuid import UUID
+from typing import Any, Optional
 
 from sqlmodel import Session, select
 
 from app.core.security import get_password_hash, verify_password
 from app.models.user import Item, ItemCreate, User, UserCreate, UserUpdate
+from app.models.email import EmailEvent, EmailParsed, EmailStatus
 
+from datetime import datetime, timezone
+
+def coerce_dt(value: Any) -> Optional[datetime]:
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, str):
+        # Handles "2026-02-27T..." and "2026-02-27T...Z"
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return None
 
 def create_user(*, session: Session, user_create: UserCreate) -> User:
     db_obj = User.model_validate(
@@ -66,3 +81,115 @@ def create_item(*, session: Session, item_in: ItemCreate, owner_id: uuid.UUID) -
     session.commit()
     session.refresh(db_item)
     return db_item
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def create_email_event(
+        session: Session,
+        *,
+        event_id: UUID,
+        source_filename: str,
+        raw_path: str,
+    ) -> EmailEvent:
+    row = EmailEvent(
+        event_id=event_id,
+        source_filename=source_filename,
+        raw_path=raw_path,
+        status=EmailStatus.queued,
+        error=None,
+        processed_at=None,
+    )
+    session.add(row)
+    session.commit()
+    session.refresh(row)
+    return row
+
+
+def set_email_event_status(
+    session: Session,
+    *,
+    event_id: UUID,
+    status: EmailStatus,
+    error: Optional[str] = None,
+    processed_at: Optional[datetime] = None,
+) -> None:
+    row = session.get(EmailEvent, event_id)
+    if row is None:
+        return
+    row.status = status
+    row.error = error
+    if processed_at is not None:
+        row.processed_at = processed_at
+    if processed_at is None and status in (EmailStatus.done, EmailStatus.failed):
+        processed_at = utcnow()
+    if processed_at is not None:
+        row.processed_at = processed_at
+    session.commit()
+
+
+def upsert_email_parsed(
+    session: Session,
+    *,
+    event_id: UUID,
+    payload: dict,
+) -> None:
+    existing = session.get(EmailParsed, event_id)
+
+    headers = payload.get("headers", {}) or {}
+    auth = (headers.get("auth_results", {}) or {})
+    flags = payload.get("derived_flags", {}) or {}
+    kw = payload.get("keyword_counts", {}) or {}
+
+    dt = coerce_dt(headers.get("date"))
+    fp = payload.get("fingerprint")
+    if not fp:
+        raise ValueError("parsed payload missing fingerprint")
+
+    if existing is None:
+        row = EmailParsed(
+            event_id=event_id,
+            fingerprint=fp,
+            from_address=headers.get("from_address"),
+            to_address=headers.get("to_address"),
+            subject=headers.get("subject"),
+            date=dt,
+            spf=auth.get("spf"),
+            dkim=auth.get("dkim"),
+            dmarc=auth.get("dmarc"),
+            display_name_mismatch=bool(flags.get("display_name_mismatch", False)),
+            sender_domain_mismatch=bool(flags.get("sender_domain_mismatch", False)),
+            lookalike_domain_detected=bool(flags.get("lookalike_domain_detected", False)),
+            internal_impersonation=bool(flags.get("internal_impersonation", False)),
+            unicode_trick_detected=bool(flags.get("unicode_trick_detected", False)),
+            urgency=kw.get("urgency"),
+            credentials=kw.get("credentials"),
+            payment=kw.get("payment"),
+            threat=kw.get("threat"),
+            parsed_payload=payload,
+        )
+        session.add(row)
+    else:
+        # if reprocessed, overwrite fields
+        existing.fingerprint = fp
+        existing.from_address = headers.get("from_address")
+        existing.to_address = headers.get("to_address")
+        existing.subject = headers.get("subject")
+        existing.date = dt
+        existing.spf = auth.get("spf")
+        existing.dkim = auth.get("dkim")
+        existing.dmarc = auth.get("dmarc")
+        existing.display_name_mismatch = bool(flags.get("display_name_mismatch", False))
+        existing.sender_domain_mismatch = bool(flags.get("sender_domain_mismatch", False))
+        existing.lookalike_domain_detected = bool(flags.get("lookalike_domain_detected", False))
+        existing.internal_impersonation = bool(flags.get("internal_impersonation", False))
+        existing.unicode_trick_detected = bool(flags.get("unicode_trick_detected", False))
+        existing.urgency = kw.get("urgency")
+        existing.credentials = kw.get("credentials")
+        existing.payment = kw.get("payment")
+        existing.threat = kw.get("threat")
+        existing.parsed_payload = payload
+        session.add(existing)
+
+    session.commit()

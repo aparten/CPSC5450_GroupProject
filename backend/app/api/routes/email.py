@@ -4,12 +4,18 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from jsonschema import ValidationError
 import uuid
 
+from app import crud
 from app.services.email_storage import save_raw_eml
 from app.services.email_processing import parse_and_validate
 from app.tasks.email_tasks import parse_inbox_email
 
-from fastapi import APIRouter
-from app.tasks.email_tasks import scan_inbox_and_enqueue
+from fastapi import APIRouter, Depends
+from sqlmodel import Session
+
+from app.core.db import get_db
+from app.crud import create_email_event
+from app.tasks.email_tasks import parse_inbox_email
+from app.services.email_filesystem import list_inbox_eml, claim_inbox_file
 
 router = APIRouter(prefix="/email", tags=["email"])
 
@@ -46,9 +52,30 @@ async def ingest_email(file: UploadFile = File(...)):
     }
 
 @router.post("/ingest/inbox")
-def ingest_inbox(limit: int = 50):
-    job = scan_inbox_and_enqueue.delay(limit=limit)
-    return {"status": "queued", "task_id": job.id, "limit": limit}
+def ingest_inbox(db: Session = Depends(get_db)):
+    filenames = list_inbox_eml()
+    queued = []
+
+    for filename in filenames:
+        event_id = uuid.uuid4()
+
+        # Move file to processing and get the actual path the worker should read
+        processing_path = claim_inbox_file(filename, str(event_id))
+
+        # Record event immediately (queued)
+        crud.create_email_event(
+            db,
+            event_id=event_id,
+            source_filename=filename,
+            raw_path=str(processing_path),
+        )
+
+        # Enqueue task with the REAL file location
+        parse_inbox_email.delay(str(event_id), str(processing_path))
+
+        queued.append({"event_id": str(event_id), "filename": filename})
+
+    return {"queued_count": len(queued), "queued": queued}
 
 # Endpoint to add an email to INBOX_DIR
 @router.post("/add_email")
