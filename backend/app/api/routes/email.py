@@ -1,6 +1,8 @@
+from typing import Annotated
+from app.models.email import EmailEvent, EmailParsed
 from pathlib import Path
 
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 from jsonschema import ValidationError
 import uuid
 
@@ -10,7 +12,7 @@ from app.services.email_processing import parse_and_validate
 from app.tasks.email_tasks import parse_inbox_email
 
 from fastapi import APIRouter, Depends
-from sqlmodel import Session
+from sqlmodel import Session, select, Sequence
 
 from app.core.db import get_db
 from app.crud import create_email_event
@@ -94,6 +96,23 @@ def add_email(file: UploadFile = File(...)):
 
     return {"status": "success", "file_path": str(file_path)}
 
+@router.get('/messages')
+async def list_messages(
+        start: int = 0,
+        limit: Annotated[int, Query(le=100)] = 100,
+        db: Session = Depends(get_db),
+) -> list[EmailEvent]:
+    events = db.exec(select(EmailEvent)).all()
+    return events
+
+@router.get('/message/{message_id}')
+async def get_message(
+        message_id: uuid.UUID,
+        db: Session = Depends(get_db),
+):
+    event = db.get(EmailEvent, message_id)
+    message = db.get(EmailParsed, message_id)
+    return { "event": event, "message": message }
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):
