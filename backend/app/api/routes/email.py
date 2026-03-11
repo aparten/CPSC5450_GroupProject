@@ -103,6 +103,7 @@ def add_email(file: UploadFile = File(...)):
 
 @router.get('/messages')
 async def list_messages(
+        current_user: CurrentUser,
         start: int = 0,
         limit: Annotated[int, Query(le=100)] = 100,
         db: Session = Depends(get_db),
@@ -112,6 +113,7 @@ async def list_messages(
 
 @router.get('/message/{message_id}')
 async def get_message(
+        current_user: CurrentUser,
         message_id: uuid.UUID,
         db: Session = Depends(get_db),
 ):
