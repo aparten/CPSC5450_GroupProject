@@ -10,6 +10,7 @@ from app import crud
 from app.models.email import EmailStatus
 from pathlib import Path
 
+from app.services.triage import TriageEngine
 from app.services.email_processing import parse_and_validate
 from app.services.email_filesystem import (
     read_processing_eml,
@@ -19,6 +20,7 @@ from app.services.email_filesystem import (
 )
 from app.services.job_status import set_status  # if you're still using this
 
+triage_engine = TriageEngine()
 
 @app.task(bind=True, name="app.tasks.email_tasks.parse_inbox_email")
 def parse_inbox_email(self, event_id: str, processing_path: str) -> dict:
@@ -33,6 +35,9 @@ def parse_inbox_email(self, event_id: str, processing_path: str) -> dict:
 
             eml_bytes = read_processing_eml(Path(processing_path))
             payload = parse_and_validate(eml_bytes, email_id=event_id)
+
+            verdict = triage_engine.triage(payload)
+            payload |= verdict
 
             # 1) Write parsed JSON to filesystem (you already have this working)
             out_path = write_parsed_json(event_id, payload)

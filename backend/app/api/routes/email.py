@@ -1,5 +1,6 @@
+from email.message import EmailMessage
 from typing import Annotated
-from app.models.email import EmailEvent, EmailParsed
+from app.models.email import EmailEvent, EmailParsed, EmailResolution
 from pathlib import Path
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
@@ -9,15 +10,14 @@ import uuid
 from app import crud
 from app.services.email_storage import save_raw_eml
 from app.services.email_processing import parse_and_validate
-from app.tasks.email_tasks import parse_inbox_email
 
 from fastapi import APIRouter, Depends
 from sqlmodel import Session, select, Sequence
 
 from app.core.db import get_db
 from app.crud import create_email_event
-from app.tasks.email_tasks import parse_inbox_email
 from app.services.email_filesystem import list_inbox_eml, claim_inbox_file
+from app.tasks.worker import app as celery_app
 
 router = APIRouter(prefix="/email", tags=["email"])
 
@@ -73,7 +73,10 @@ def ingest_inbox(db: Session = Depends(get_db)):
         )
 
         # Enqueue task with the REAL file location
-        parse_inbox_email.delay(str(event_id), str(processing_path))
+        celery_app.send_task("app.tasks.email_tasks.parse_inbox_email", args=[
+            str(event_id),
+            str(processing_path),
+        ])
 
         queued.append({"event_id": str(event_id), "filename": filename})
 
@@ -112,7 +115,8 @@ async def get_message(
 ):
     event = db.get(EmailEvent, message_id)
     message = db.get(EmailParsed, message_id)
-    return { "event": event, "message": message }
+    resolution = db.get(EmailResolution, message_id)
+    return { "event": event, "message": message, "resultions": resolution }
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):
