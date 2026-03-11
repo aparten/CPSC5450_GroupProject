@@ -11,6 +11,7 @@ engine = create_engine(str(settings.POSTGRES_DSN), pool_pre_ping=True)
 def init_db() -> None:
     # Import the models package so SQLModel table classes can register metadata.
     import app.models.user  # noqa: F401
+    import app.models.email
     from app import crud
     from app.models.user import UserCreate
 

@@ -5,5 +5,8 @@ app = Celery(
     "app",
     broker=str(settings.REDIS_DSN),
     backend=str(settings.REDIS_DSN),
-    include=["app.tasks"],
+    include=[
+        "app.tasks.tasks", 
+        "app.tasks.email_tasks"
+    ],
 )

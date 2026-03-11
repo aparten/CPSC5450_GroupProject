@@ -4,8 +4,7 @@ from app.core.config import settings
 from app.core.db import init_db
 from starlette.middleware.cors import CORSMiddleware
 from app.api.main import api_router
-
-import app.worker as worker
+from app.tasks.worker import app as celery_app
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -37,12 +36,7 @@ def read_root():
 
 @app.get("/submit_task")
 def submit_task():
-    """Celery Task
-
-    Returns:
-        Any: task.id
-    """
-    task = worker.app.send_task("app.tasks.ping", args=[1])
+    task = celery_app.send_task("app.tasks.tasks.ping", args=[1])
     return {"task_id": task.id}
 
 
