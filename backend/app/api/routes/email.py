@@ -1,6 +1,7 @@
+from pydantic import BaseModel
 from email.message import EmailMessage
 from typing import Annotated
-from app.models.email import EmailEvent, EmailParsed, EmailResolution
+from app.models.email import EmailEvent, EmailParsed, EmailResolution, EmailAction, EmailResolutionBase
 from pathlib import Path
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
@@ -18,6 +19,7 @@ from app.core.db import get_db
 from app.crud import create_email_event
 from app.services.email_filesystem import list_inbox_eml, claim_inbox_file
 from app.tasks.worker import app as celery_app
+from app.api.deps import CurrentUser
 
 router = APIRouter(prefix="/email", tags=["email"])
 
@@ -117,6 +119,24 @@ async def get_message(
     message = db.get(EmailParsed, message_id)
     resolution = db.get(EmailResolution, message_id)
     return { "event": event, "message": message, "resultions": resolution }
+
+@router.post('/message/{message_id}/resolve')
+async def resolve_email(
+        message_id: uuid.UUID,
+        base_resolution: EmailResolutionBase,
+        current_user: CurrentUser,
+        db: Session = Depends(get_db),
+) -> EmailResolution:
+    resolution = EmailResolution(
+        event_id=message_id,
+        acting_user_id=current_user.id,
+        action=base_resolution.action,
+    )
+    db.add(resolution)
+    db.commit()
+
+    db.refresh(resolution)
+    return resolution
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):
