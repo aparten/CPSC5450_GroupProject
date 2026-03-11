@@ -1,11 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { HeroBullets } from '@/components/hero/HeroBullets'
-import { FeaturesCards } from '@/components/feature-cards/FeatureCards'
-import { ClientsCarousel } from '@/components/carousel/ClientsCarousel'
 import { IconCheck } from '@tabler/icons-react'
 import {
   Badge,
-  Box,
   Container,
   Group,
   List,
@@ -17,90 +14,69 @@ import {
 } from '@mantine/core'
 import classes from './index.module.css'
 
-
 export const Route = createFileRoute('/')({ component: App })
 
 function App() {
   return (
     <div>
       <HeroBullets />
+
       <Container size="lg" py="xl">
-        <Box mb={32}>
-          <Text size="xl" fw={700} ta="center">
-            Trusted by over 10,000 teams worldwide
-          </Text>
-        </Box>
-        <Box mb={64}>
-          <ClientsCarousel />
-        </Box>
         <Group justify="center">
           <Badge variant="light" size="lg" radius="sm">
-            Why teams choose us
+            How it works
           </Badge>
         </Group>
         <Title order={2} className={classes.title} ta="center" mt="sm">
-          Built for reliability and long-term growth
+          Streamlined phishing response workflow
         </Title>
         <Text c="dimmed" className={classes.description} ta="center" mt="md">
-          We combine proven execution, product thinking, and transparent collaboration
-          so your team can ship faster with less operational risk.
+          Our AI analyzes incoming emails for phishing indicators, assigns confidence scores,
+          and queues suspicious messages for SOC analyst review.
         </Text>
 
-        <Paper className={classes.section} radius="xl" p={{ base: 'md', md: 'xl' }} mt="xl">
-          <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl">
-            <Paper withBorder radius="lg" p="xl" className={classes.card}>
-              <Title order={3} className={classes.cardTitle}>
-                Why choose us?
-              </Title>
-              <Text c="dimmed" mt="md">
-                We provide top-tier services tailored to your goals. Our team delivers
-                practical, high-quality solutions that are designed for measurable impact.
-              </Text>
-              <List
-                mt="lg"
-                spacing="sm"
-                className={classes.cardList}
-                icon={
-                  <ThemeIcon color="blue" variant="light" radius="xl" size={22}>
-                    <IconCheck size={14} stroke={2} />
-                  </ThemeIcon>
-                }
-              >
-                <List.Item>Expert team with years of hands-on delivery experience</List.Item>
-                <List.Item>Customer-first process with proactive communication</List.Item>
-                <List.Item>Solutions designed to scale with your business</List.Item>
-              </List>
-            </Paper>
+        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" mt="xl">
+          <Paper withBorder radius="lg" p="xl">
+            <Title order={3} mb="md">AI Detection</Title>
+            <Text c="dimmed" mb="md">
+              Our system automatically scans emails for common phishing patterns and
+              generates detailed analysis reports for each suspicious message.
+            </Text>
+            <List
+              spacing="sm"
+              icon={
+                <ThemeIcon color="blue" variant="light" radius="xl" size={22}>
+                  <IconCheck size={14} stroke={2} />
+                </ThemeIcon>
+              }
+            >
+              <List.Item>URL and domain analysis</List.Item>
+              <List.Item>Sender verification and mismatch detection</List.Item>
+              <List.Item>Unicode trick and spoofing detection</List.Item>
+            </List>
+          </Paper>
 
-            <Paper withBorder radius="lg" p="xl" className={classes.card}>
-              <Title order={3} className={classes.cardTitle}>
-                Our mission
-              </Title>
-              <Text c="dimmed" mt="md">
-                We empower organizations through modern technology and dependable execution.
-                Our focus is building lasting partnerships that keep delivering value over time.
-              </Text>
-              <List
-                mt="lg"
-                spacing="sm"
-                className={classes.cardList}
-                icon={
-                  <ThemeIcon color="blue" variant="light" radius="xl" size={22}>
-                    <IconCheck size={14} stroke={2} />
-                  </ThemeIcon>
-                }
-              >
-                <List.Item>Deliver innovative, business-focused technology outcomes</List.Item>
-                <List.Item>Build long-term partnerships grounded in trust</List.Item>
-                <List.Item>Continuously improve with market and customer feedback</List.Item>
-              </List>
-            </Paper>
-          </SimpleGrid>
-        </Paper>
+          <Paper withBorder radius="lg" p="xl">
+            <Title order={3} mb="md">Human Review</Title>
+            <Text c="dimmed" mb="md">
+              SOC analysts review AI findings and make final decisions on flagged emails.
+              This ensures accuracy while reducing manual workload.
+            </Text>
+            <List
+              spacing="sm"
+              icon={
+                <ThemeIcon color="blue" variant="light" radius="xl" size={22}>
+                  <IconCheck size={14} stroke={2} />
+                </ThemeIcon>
+              }
+            >
+              <List.Item>Approve or reject flagged emails</List.Item>
+              <List.Item>Add notes and rationale for decisions</List.Item>
+              <List.Item>Track decision history for auditing</List.Item>
+            </List>
+          </Paper>
+        </SimpleGrid>
       </Container>
-      <div>
-        <FeaturesCards />
-      </div>
     </div>
   )
 }

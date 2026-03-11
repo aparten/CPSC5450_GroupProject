@@ -1,24 +1,18 @@
 .inner {
   display: flex;
-  justify-content: space-between;
-  padding-top: calc(var(--mantine-spacing-xl) * 4);
-  padding-bottom: calc(var(--mantine-spacing-xl) * 4);
+  justify-content: center;
+  padding-top: calc(var(--mantine-spacing-xl) * 3);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 3);
 }
 
 .content {
-  max-width: 480px;
-  margin-right: calc(var(--mantine-spacing-xl) * 3);
-
-  @media (max-width: $mantine-breakpoint-md) {
-    max-width: 100%;
-    margin-right: 0;
-  }
+  max-width: 600px;
 }
 
 .title {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   font-family: Outfit, var(--mantine-font-family);
-  font-size: 44px;
+  font-size: 40px;
   line-height: 1.2;
   font-weight: 500;
 
@@ -30,17 +24,6 @@
 .control {
   @media (max-width: $mantine-breakpoint-xs) {
     flex: 1;
-  }
-}
-
-.image {
-  width: 576px;
-  height: 556px;
-
-  /* Rounded corners */
-  border-radius: var(--mantine-radius-lg);
-  @media (max-width: $mantine-breakpoint-md) {
-    display: none;
   }
 }
 

@@ -1,130 +1,76 @@
-import whiteLogoUrl from "@/assets/svg/Company-Logo_White.svg";
-import blackLogoUrl from "@/assets/svg/Company-Logo_Black.svg";
-import { IconChevronDown } from '@tabler/icons-react';
-import { ActionIcon, Burger, Center, Container, Group, Menu, useMantineColorScheme, useComputedColorScheme, } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconBrightnessDown, IconMoon } from '@tabler/icons-react';
-import classes from './HeaderMenu.module.css';
-import { Link, useNavigate } from "@tanstack/react-router";
-
-const links = [
-  { link: '/about', label: 'Features' },
-  {
-    link: '#1',
-    label: 'Learn',
-    links: [
-      { link: '/docs', label: 'Documentation' },
-      { link: '/resources', label: 'Resources' },
-      { link: '/community', label: 'Community' },
-      { link: '/blog', label: 'Blog' },
-    ],
-  },
-  { link: '/about', label: 'About' },
-  { link: '/pricing', label: 'Pricing' },
-  {
-    link: '#2',
-    label: 'Support',
-    links: [
-      { link: '/faq', label: 'FAQ' },
-      { link: '/demo', label: 'Book a demo' },
-      { link: '/forums', label: 'Forums' },
-    ],
-  },
-];
-
-
+import { ActionIcon, Button, Container, Group, useMantineColorScheme, useComputedColorScheme } from '@mantine/core'
+import { IconBrightnessDown, IconMoon, IconLogout, IconUser, IconLayoutDashboard, IconHome } from '@tabler/icons-react'
+import classes from './HeaderMenu.module.css'
+import { useNavigate } from "@tanstack/react-router"
+import { getToken, logout } from '@/lib/auth'
 
 export function HeaderMenu() {
-
-  // Hooks to manage color scheme
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
-
-  const computedColorScheme = useComputedColorScheme('light');
-
-  const toggleColorScheme = () => {
-    setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
-  };
-
-  const [opened, { toggle }] = useDisclosure(false);
-
-  // Choose logo based on color scheme
-  const logoSrc = colorScheme === 'dark' ? whiteLogoUrl : blackLogoUrl;
-
-  // Used for logo navigation
+  const { colorScheme, setColorScheme } = useMantineColorScheme()
+  const computedColorScheme = useComputedColorScheme('light')
   const navigate = useNavigate()
 
-  // Generate menu items based on the links array
-  const items = links.map((link) => {
-    const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
-    ));
+  const toggleColorScheme = () => {
+    setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')
+  }
 
-    if (menuItems) {
-      return (
-        <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
-          <Menu.Target>
-            <a
-              href={link.link}
-              className={classes.link}
-              onClick={(event) => event.preventDefault()}
-            >
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size={14} stroke={1.5} />
-              </Center>
-            </a>
-          </Menu.Target>
-          <Menu.Dropdown>
-            {menuItems}
-          </Menu.Dropdown>
-
-        </Menu>
-      );
-    }
-
-    return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </a>
-    );
-  });
+  const isLoggedIn = !!getToken()
 
   return (
     <header className={classes.header}>
-      <Container size="md">
-        <div className={classes.inner}>
-          <img
-            src={logoSrc}
-            width={175}
-            height={100}
-            alt="Company logo"
-            onClick={() => navigate({ to: "/" })}
-            style={{ cursor: 'pointer' }}
-          />
-          <Group gap={5} visibleFrom="sm">
-            {items}
+      <Container size="lg">
+        <Group justify="space-between">
+          <Group gap={8}>
+            <Button
+              variant="default"
+              size="sm"
+              leftSection={<IconHome size={16} />}
+              onClick={() => navigate({ to: "/" })}
+            >
+              Home
+            </Button>
+            {isLoggedIn && (
+              <>
+                <Button
+                  variant="default"
+                  size="sm"
+                  leftSection={<IconLayoutDashboard size={16} />}
+                  onClick={() => navigate({ to: '/app/dashboard' })}
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  variant="default"
+                  size="sm"
+                  leftSection={<IconUser size={16} />}
+                  onClick={() => navigate({ to: '/app/profile' })}
+                >
+                  Profile
+                </Button>
+              </>
+            )}
+          </Group>
+
+          <Group gap={8}>
             <ActionIcon
               variant="default"
               size="lg"
-              aria-label="Disabled and not interactive"
-              onClick={() => toggleColorScheme()}>
+              aria-label="Toggle color scheme"
+              onClick={toggleColorScheme}
+            >
               {colorScheme === 'dark' ? <IconBrightnessDown /> : <IconMoon />}
             </ActionIcon>
+            {isLoggedIn ? (
+              <Button variant="default" size="sm" leftSection={<IconLogout size={16} />} onClick={logout}>
+                Logout
+              </Button>
+            ) : (
+              <Button variant="default" size="sm" onClick={() => navigate({ to: '/auth/login' })}>
+                Login
+              </Button>
+            )}
           </Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            size="sm"
-            hiddenFrom="sm"
-            aria-label="Toggle navigation"
-          />
-        </div>
+        </Group>
       </Container>
     </header>
-  );
+  )
 }

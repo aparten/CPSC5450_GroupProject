@@ -1,20 +1,26 @@
-import { IconCheck } from '@tabler/icons-react';
-import { Button, Container, Group, Image, List, Text, ThemeIcon, Title } from '@mantine/core';
-import image from '@/assets/svg/hero.svg';
-import classes from './HeroBullets.module.css';
-import { MultiMonitorWorkspace } from '../icons/MultiMonitorWorkspace';
+import { IconCheck, IconShieldLock } from '@tabler/icons-react'
+import { Button, Container, Group, List, Text, ThemeIcon, Title } from '@mantine/core'
+import { useNavigate } from '@tanstack/react-router'
+import classes from './HeroBullets.module.css'
 
 export function HeroBullets() {
+  const navigate = useNavigate()
+
   return (
     <Container size="md">
       <div className={classes.inner}>
         <div className={classes.content}>
-          <Title className={classes.title}>
-            A <span className={classes.highlight}>modern</span> React <br /> components library
+          <Group justify="center" mb="md">
+            <ThemeIcon size={80} radius="xl" variant="light">
+              <IconShieldLock size={48} stroke={1.5} />
+            </ThemeIcon>
+          </Group>
+          <Title className={classes.title} ta="center">
+            <span className={classes.highlight}>AI-Powered</span> Phishing Detection
           </Title>
-          <Text c="dimmed" mt="md">
-            Build fully functional accessible web applications faster than ever – Mantine includes
-            more than 120 customizable components and hooks to cover you in any situation
+          <Text c="dimmed" mt="md" ta="center">
+            Protect your university from phishing attacks with our intelligent email triage system.
+            Analyze suspicious emails, detect threats, and respond faster with AI assistance.
           </Text>
 
           <List
@@ -28,33 +34,31 @@ export function HeroBullets() {
             }
           >
             <List.Item>
-              <b>TypeScript based</b> – build type safe applications, all components and hooks
-              export types
+              <b>AI-Powered Analysis</b> – automatically detect phishing indicators like suspicious
+              URLs, sender mismatches, and unicode tricks
             </List.Item>
             <List.Item>
-              <b>Free and open source</b> – all packages have MIT license, you can use Mantine in
-              any project
+              <b>Human-in-the-Loop</b> – SOC analysts review AI decisions before taking action,
+              ensuring accuracy and control
             </List.Item>
             <List.Item>
-              <b>No annoying focus ring</b> – focus ring will appear only when user navigates with
-              keyboard
+              <b>Real-time Triage</b> – prioritize threats by severity and confidence scores
+              for efficient response
             </List.Item>
           </List>
 
-          <Group mt={30}>
-            <Button radius="xl" size="md" className={classes.control}>
-              Get started
-            </Button>
-            <Button variant="default" radius="xl" size="md" className={classes.control}>
-              Source code
+          <Group mt={30} justify="center">
+            <Button
+              radius="xl"
+              size="md"
+              className={classes.control}
+              onClick={() => navigate({ to: '/app/dashboard' })}
+            >
+              Go to Dashboard
             </Button>
           </Group>
         </div>
-        <MultiMonitorWorkspace
-          imgClassName="rounded-lg shadow-xl"
-        />
-
       </div>
     </Container>
-  );
+  )
 }
