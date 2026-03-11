@@ -1,4 +1,4 @@
-import { IconCheck, IconShieldLock } from '@tabler/icons-react'
+import { IconShieldLock, IconCheck } from '@tabler/icons-react'
 import { Button, Container, Group, List, Text, ThemeIcon, Title } from '@mantine/core'
 import { useNavigate } from '@tanstack/react-router'
 import classes from './HeroBullets.module.css'
@@ -16,11 +16,11 @@ export function HeroBullets() {
             </ThemeIcon>
           </Group>
           <Title className={classes.title} ta="center">
-            <span className={classes.highlight}>AI-Powered</span> Phishing Detection
+            University Email Security
           </Title>
           <Text c="dimmed" mt="md" ta="center">
-            Protect your university from phishing attacks with our intelligent email triage system.
-            Analyze suspicious emails, detect threats, and respond faster with AI assistance.
+            A simple tool to help security analysts review and triage suspicious emails.
+            Spot phishing attempts before they reach students and staff.
           </Text>
 
           <List
@@ -34,16 +34,13 @@ export function HeroBullets() {
             }
           >
             <List.Item>
-              <b>AI-Powered Analysis</b> – automatically detect phishing indicators like suspicious
-              URLs, sender mismatches, and unicode tricks
+              <b>Email Parsing</b> - extracts URLs, domains, and IP addresses from incoming emails
             </List.Item>
             <List.Item>
-              <b>Human-in-the-Loop</b> – SOC analysts review AI decisions before taking action,
-              ensuring accuracy and control
+              <b>Threat Detection</b> - flags sender mismatches, suspicious links, and phishing patterns
             </List.Item>
             <List.Item>
-              <b>Real-time Triage</b> – prioritize threats by severity and confidence scores
-              for efficient response
+              <b>Analyst Review</b> - security team approves or rejects flagged emails before action
             </List.Item>
           </List>
 
