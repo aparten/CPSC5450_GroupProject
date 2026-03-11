@@ -20,6 +20,11 @@ class EmailStatus(str, Enum):
     failed = "failed"
 
 
+class EmailAction(str, Enum):
+    accepted = "accepted"
+    rejected = "rejected"
+
+
 class EmailEvent(SQLModel, table=True):
     __tablename__ = "email_events"
 
@@ -92,3 +97,7 @@ class EmailParsed(SQLModel, table=True):
 
     # 1) full JSON payload
     parsed_payload: Dict[str, Any] = Field(sa_column=Column(JSONB, nullable=False))
+ 
+    # Triage model output
+    prob_phishing: Optional[float] = Field(default = None)
+    prob_benign: Optional[float] = Field(default = None)
