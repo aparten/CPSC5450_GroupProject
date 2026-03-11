@@ -1,12 +1,12 @@
 import { ClientOnly, createFileRoute } from '@tanstack/react-router'
 import { requireAuth } from '@/lib/auth'
 import { useMemo, useState } from 'react'
-import { Box, Container, Grid, Stack, Tabs } from '@mantine/core'
+import { Alert, Box, Center, Container, Grid, Loader, Stack, Tabs } from '@mantine/core'
 import { DashboardHeader } from '@/features/dashboard/DashboardHeader'
 import { QueuePanel } from '@/features/dashboard/QueuePanel'
 import { CaseDetailPanel } from '@/features/dashboard/CaseDetailPanel'
-import { mockQueue } from '@/features/dashboard/mockQueue'
-import type { DecisionEntry, QueueItem, QueueStatus } from '@/features/dashboard/types'
+import { useEmailQueue } from '@/features/dashboard/useEmailQueue'
+import type { DecisionEntry, QueueStatus } from '@/features/dashboard/types'
 
 export const Route = createFileRoute('/app/dashboard')({
   beforeLoad: async () => {
@@ -18,11 +18,12 @@ export const Route = createFileRoute('/app/dashboard')({
 function RouteComponent() {
   const [query, setQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<'all' | QueueStatus>('all')
-  const [selectedId, setSelectedId] = useState<string>(mockQueue[0]?.event_id ?? '')
+  const [selectedId, setSelectedId] = useState<string>('')
   const [note, setNote] = useState('')
   const [mobileTab, setMobileTab] = useState<string>('queue')
-  const [queue, setQueue] = useState<QueueItem[]>(mockQueue)
   const [historyByCase, setHistoryByCase] = useState<Record<string, DecisionEntry[]>>({})
+
+  const { queue, setQueue, loading, error } = useEmailQueue()
 
   const filteredQueue = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -37,8 +38,14 @@ function RouteComponent() {
     })
   }, [query, queue, statusFilter])
 
+  // Auto-select first item if nothing is selected or selection is no longer in the list
+  const effectiveSelectedId =
+    filteredQueue.find((item) => item.event_id === selectedId)
+      ? selectedId
+      : (filteredQueue[0]?.event_id ?? '')
+
   const selectedItem =
-    filteredQueue.find((item) => item.event_id === selectedId) ?? filteredQueue[0] ?? null
+    filteredQueue.find((item) => item.event_id === effectiveSelectedId) ?? null
 
   const applyDecision = (status: QueueStatus) => {
     if (!selectedItem) return
@@ -86,67 +93,81 @@ function RouteComponent() {
         <Stack gap="lg">
           <DashboardHeader queue={filteredQueue} />
 
-          <Box hiddenFrom="md">
-            <Tabs value={mobileTab} onChange={(value) => setMobileTab(value ?? 'queue')}>
-              <Tabs.List grow>
-                <Tabs.Tab value="queue">Queue</Tabs.Tab>
-                <Tabs.Tab value="case">Selected Case</Tabs.Tab>
-              </Tabs.List>
+          {error && (
+            <Alert color="red" title="Error loading queue" variant="light">
+              {error}
+            </Alert>
+          )}
 
-              <Tabs.Panel value="queue" pt="md">
-                <QueuePanel
-                  query={query}
-                  onQueryChange={setQuery}
-                  statusFilter={statusFilter}
-                  onStatusFilterChange={setStatusFilter}
-                  queue={filteredQueue}
-                  selectedId={selectedItem?.event_id ?? ''}
-                  onSelect={(id) => {
-                    setSelectedId(id)
-                    setMobileTab('case')
-                  }}
-                  onResetFilters={resetFilters}
-                />
-              </Tabs.Panel>
+          {loading && queue.length === 0 ? (
+            <Center py="xl">
+              <Loader size="lg" />
+            </Center>
+          ) : (
+            <>
+              <Box hiddenFrom="md">
+                <Tabs value={mobileTab} onChange={(value) => setMobileTab(value ?? 'queue')}>
+                  <Tabs.List grow>
+                    <Tabs.Tab value="queue">Queue</Tabs.Tab>
+                    <Tabs.Tab value="case">Selected Case</Tabs.Tab>
+                  </Tabs.List>
 
-              <Tabs.Panel value="case" pt="md">
-                <CaseDetailPanel
-                  selectedItem={selectedItem}
-                  note={note}
-                  onNoteChange={setNote}
-                  onDecision={applyDecision}
-                  history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
-                />
-              </Tabs.Panel>
-            </Tabs>
-          </Box>
+                  <Tabs.Panel value="queue" pt="md">
+                    <QueuePanel
+                      query={query}
+                      onQueryChange={setQuery}
+                      statusFilter={statusFilter}
+                      onStatusFilterChange={setStatusFilter}
+                      queue={filteredQueue}
+                      selectedId={effectiveSelectedId}
+                      onSelect={(id) => {
+                        setSelectedId(id)
+                        setMobileTab('case')
+                      }}
+                      onResetFilters={resetFilters}
+                    />
+                  </Tabs.Panel>
 
-          <Grid gutter="lg" visibleFrom="md">
-            <Grid.Col span={{ md: 7, lg: 8 }}>
-              <QueuePanel
-                query={query}
-                onQueryChange={setQuery}
-                statusFilter={statusFilter}
-                onStatusFilterChange={setStatusFilter}
-                queue={filteredQueue}
-                selectedId={selectedItem?.event_id ?? ''}
-                onSelect={setSelectedId}
-                onResetFilters={resetFilters}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ md: 5, lg: 4 }}>
-              <Box style={{ position: 'sticky', top: 16 }}>
-                <CaseDetailPanel
-                  selectedItem={selectedItem}
-                  note={note}
-                  onNoteChange={setNote}
-                  onDecision={applyDecision}
-                  history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
-                />
+                  <Tabs.Panel value="case" pt="md">
+                    <CaseDetailPanel
+                      selectedItem={selectedItem}
+                      note={note}
+                      onNoteChange={setNote}
+                      onDecision={applyDecision}
+                      history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
+                    />
+                  </Tabs.Panel>
+                </Tabs>
               </Box>
-            </Grid.Col>
-          </Grid>
+
+              <Grid gutter="lg" visibleFrom="md">
+                <Grid.Col span={{ md: 7, lg: 8 }}>
+                  <QueuePanel
+                    query={query}
+                    onQueryChange={setQuery}
+                    statusFilter={statusFilter}
+                    onStatusFilterChange={setStatusFilter}
+                    queue={filteredQueue}
+                    selectedId={effectiveSelectedId}
+                    onSelect={setSelectedId}
+                    onResetFilters={resetFilters}
+                  />
+                </Grid.Col>
+
+                <Grid.Col span={{ md: 5, lg: 4 }}>
+                  <Box style={{ position: 'sticky', top: 16 }}>
+                    <CaseDetailPanel
+                      selectedItem={selectedItem}
+                      note={note}
+                      onNoteChange={setNote}
+                      onDecision={applyDecision}
+                      history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
+                    />
+                  </Box>
+                </Grid.Col>
+              </Grid>
+            </>
+          )}
         </Stack>
       </Container>
     </ClientOnly>

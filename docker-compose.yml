@@ -125,6 +125,19 @@ services:
       volumes:
         - postgres-data:/var/lib/postgresql # See breaking change on PR https://github.com/docker-library/postgres/pull/1259
         - ./svc_data/postgres_init:/docker-entrypoint-initdb.d:ro # Mounting initialization scripts for PostgreSQL
+  redisinsight:
+  # RedisInsight: Web-based Redis GUI
+  # connection string: redis://:password123@redis
+    container_name: soc-redisinsight
+    image: redis/redisinsight:latest
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight-data:/data
+    depends_on:
+      - redis
+
   pgweb:
   # Pgweb: Web-based PostgreSQL database browser
     container_name: soc-pgweb
@@ -143,4 +156,6 @@ volumes:
   email-data:
     driver: local
   postgres-data:
+    driver: local
+  redisinsight-data:
     driver: local
