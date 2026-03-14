@@ -20,6 +20,11 @@ class EmailStatus(str, Enum):
     failed = "failed"
 
 
+class EmailAction(str, Enum):
+    accepted = "accepted"
+    rejected = "rejected"
+
+
 class EmailEvent(SQLModel, table=True):
     __tablename__ = "email_events"
 
@@ -92,3 +97,24 @@ class EmailParsed(SQLModel, table=True):
 
     # 1) full JSON payload
     parsed_payload: Dict[str, Any] = Field(sa_column=Column(JSONB, nullable=False))
+
+    # Triage model output
+    prob_phishing: Optional[float] = Field(default = None)
+    prob_benign: Optional[float] = Field(default = None)
+
+
+class EmailResolutionBase(SQLModel):
+    action: EmailAction = Field(
+        sa_column=Column(SAEnum(EmailAction, name="email_action"), nullable=False, index=True),
+    )
+
+class EmailResolution(EmailResolutionBase, table=True):
+    __tablename__ = "email_resolutions"
+
+    event_id: uuid.UUID = Field(primary_key=True, foreign_key="email_events.event_id")
+    acting_user_id: uuid.UUID = Field(foreign_key="user.id")
+
+    date: datetime = Field(
+        default_factory=utcnow,
+        sa_column=Column(DateTime(timezone=True), nullable=True, index=True),
+    )

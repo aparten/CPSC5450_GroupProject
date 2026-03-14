@@ -2,7 +2,6 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { HeaderMenu } from '@/components/navbar/HeaderMenu'
-import { FooterLinks } from '@/components/footer/FooterLinks'
 import { NotFound } from '@/components/not-found/NotFound'
 import '@mantine/core/styles.css';
 import { createTheme, MantineProvider, ColorSchemeScript } from '@mantine/core';
@@ -95,9 +94,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           />
           <Scripts />
         </body>
-        <footer>
-          <FooterLinks />
-        </footer>
       </MantineProvider>
     </html>
   )

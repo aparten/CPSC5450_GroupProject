@@ -210,3 +210,4 @@ marimo/_lsp/
 __marimo__/
 backend/app/__pycache__
 .vscode/settings.json
+backend/app/email_data

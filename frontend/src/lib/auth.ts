@@ -77,3 +77,8 @@ export async function register(email: string, password: string, name: string) {
 
   return res.json()
 }
+
+export function logout() {
+  clearToken()
+  window.location.href = '/auth/login'
+}

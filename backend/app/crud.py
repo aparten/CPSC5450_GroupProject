@@ -167,6 +167,8 @@ def upsert_email_parsed(
             credentials=kw.get("credentials"),
             payment=kw.get("payment"),
             threat=kw.get("threat"),
+            prob_phishing=payload.get("p_phishing"),
+            prob_benign=payload.get("p_benign"),
             parsed_payload=payload,
         )
         session.add(row)
@@ -189,6 +191,8 @@ def upsert_email_parsed(
         existing.credentials = kw.get("credentials")
         existing.payment = kw.get("payment")
         existing.threat = kw.get("threat")
+        existing.prob_phishing = kw.get("p_phishing")
+        existing.prob_benign = kw.get("p_benign")
         existing.parsed_payload = payload
         session.add(existing)
 
