@@ -1,3 +1,4 @@
+from app.models.audit import AuditEvent
 from typing import Annotated
 import uuid
 
@@ -162,6 +163,16 @@ async def resolve_email(
         reason=base_resolution.reason,
     )
     db.add(resolution)
+
+    audit_event = AuditEvent(
+        acting_user_id=current_user.id,
+        action="email.resolve_email",
+        data={
+            "event_id": str(message_id),
+        }
+    )
+    db.add(audit_event)
+
     db.commit()
     db.refresh(resolution)
     return resolution
