@@ -159,6 +159,7 @@ async def resolve_email(
         event_id=message_id,
         acting_user_id=current_user.id,
         action=base_resolution.action,
+        reason=base_resolution.reason,
     )
     db.add(resolution)
     db.commit()

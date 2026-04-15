@@ -108,6 +108,8 @@ class EmailResolutionBase(SQLModel):
         sa_column=Column(SAEnum(EmailAction, name="email_action"), nullable=False, index=True),
     )
 
+    reason: str = Field(nullable=False)
+
 class EmailResolution(EmailResolutionBase, table=True):
     __tablename__ = "email_resolutions"
 
