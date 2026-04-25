@@ -1,6 +1,6 @@
 import { ClientOnly, createFileRoute } from '@tanstack/react-router'
-import { requireAuth, ingestInbox } from '@/lib/auth'
-import { useMemo, useState } from 'react'
+import { requireAuth, ingestInbox, getToken } from '@/lib/auth'
+import { useMemo, useState, useEffect } from 'react'
 import { Alert, Box, Center, Container, Grid, Loader, Stack, Tabs } from '@mantine/core'
 import { DashboardHeader } from '@/features/dashboard/DashboardHeader'
 import { QueuePanel } from '@/features/dashboard/QueuePanel'
@@ -23,6 +23,19 @@ function RouteComponent() {
   const [mobileTab, setMobileTab] = useState<string>('queue')
   const [historyByCase, setHistoryByCase] = useState<Record<string, DecisionEntry[]>>({})
   const [isProcessing, setIsProcessing] = useState(false)
+
+  const [userRole, setUserRole] = useState<number>(3)
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/v1/users/me', {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(user => user && setUserRole(user.role))
+      .catch(() => {})
+  }, [])
+
+  const readOnly = userRole === 1
 
   const { queue, setQueue, loading, error, hasPending, refresh } = useEmailQueue()
 
@@ -108,6 +121,7 @@ function RouteComponent() {
             queue={filteredQueue}
             onProcessEmails={handleProcessEmails}
             isProcessing={isProcessing}
+            readOnly={readOnly}
           />
 
           {error && (
@@ -153,6 +167,7 @@ function RouteComponent() {
                       onNoteChange={setNote}
                       onDecision={applyDecision}
                       history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
+                      readOnly={readOnly}
                     />
                   </Tabs.Panel>
                 </Tabs>
@@ -181,6 +196,7 @@ function RouteComponent() {
                       onNoteChange={setNote}
                       onDecision={applyDecision}
                       history={selectedItem ? historyByCase[selectedItem.event_id] ?? [] : []}
+                      readOnly={readOnly}
                     />
                   </Box>
                 </Grid.Col>

@@ -1,8 +1,10 @@
-import { Badge, Group, Paper, ScrollArea, Stack, Text, Title } from '@mantine/core'
+import { useState, useEffect } from 'react'
+import { Badge, Button, Group, Loader, Modal, Paper, ScrollArea, Stack, Text, Title } from '@mantine/core'
 import { labelColor } from './colors'
 import { ActionSection } from './ActionSection'
 import { EvidenceSection } from './EvidenceSection'
 import type { DecisionEntry, QueueItem, QueueStatus } from './types'
+import { fetchRawEmail } from '@/lib/api'
 
 type CaseDetailPanelProps = {
   selectedItem: QueueItem | null
@@ -10,6 +12,7 @@ type CaseDetailPanelProps = {
   onNoteChange: (value: string) => void
   onDecision: (status: QueueStatus) => void
   history: DecisionEntry[]
+  readOnly?: boolean
 }
 
 export function CaseDetailPanel({
@@ -18,7 +21,30 @@ export function CaseDetailPanel({
   onNoteChange,
   onDecision,
   history,
+  readOnly,
 }: CaseDetailPanelProps) {
+  const [rawOpen, setRawOpen] = useState(false)
+  const [rawContent, setRawContent] = useState<string | null>(null)
+  const [rawLoading, setRawLoading] = useState(false)
+  const [rawError, setRawError] = useState<string | null>(null)
+
+  useEffect(() => { setRawContent(null); setRawError(null) }, [selectedItem?.event_id])
+
+  async function handleViewRaw() {
+    setRawOpen(true)
+    if (rawContent) return
+    setRawLoading(true)
+    setRawError(null)
+    try {
+      const text = await fetchRawEmail(selectedItem!.event_id)
+      setRawContent(text)
+    } catch {
+      setRawError('Failed to load raw email.')
+    } finally {
+      setRawLoading(false)
+    }
+  }
+
   if (!selectedItem) {
     return (
       <Paper withBorder radius="md" p="md" h="100%">
@@ -28,20 +54,47 @@ export function CaseDetailPanel({
   }
 
   return (
-    <Paper withBorder radius="md" p="md" h="100%">
-      <ScrollArea.Autosize mah={640} type="auto" offsetScrollbars>
-        <Stack gap="md">
-          <Group justify="space-between" align="flex-start">
-            <div>
-              <Text c="dimmed" size="xs" tt="uppercase">
-                Selected Case
-              </Text>
-              <Title order={4}>{selectedItem.event_id}</Title>
-            </div>
-            <Badge color={labelColor(selectedItem.parsed.label)}>
-              {selectedItem.parsed.label ?? 'unlabeled'}
-            </Badge>
-          </Group>
+    <>
+      <Modal
+        opened={rawOpen}
+        onClose={() => setRawOpen(false)}
+        title="Raw Email"
+        size="xl"
+      >
+        {rawLoading ? (
+          <Loader />
+        ) : rawError ? (
+          <Text c="red">{rawError}</Text>
+        ) : (
+          <ScrollArea mah={500}>
+            <pre style={{ fontSize: '0.75rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+              {rawContent}
+            </pre>
+          </ScrollArea>
+        )}
+      </Modal>
+
+      <Paper withBorder radius="md" p="md" h="100%">
+        <ScrollArea.Autosize mah={640} type="auto" offsetScrollbars>
+          <Stack gap="md">
+            <Group justify="space-between" align="flex-start">
+              <div>
+                <Text c="dimmed" size="xs" tt="uppercase">
+                  Selected Case
+                </Text>
+                <Title order={4}>{selectedItem.event_id}</Title>
+              </div>
+              <Group gap="xs">
+                {!readOnly && (
+                  <Button size="xs" variant="filled" color="blue" onClick={handleViewRaw}>
+                    View Raw
+                  </Button>
+                )}
+                <Badge color={labelColor(selectedItem.parsed.label)}>
+                  {selectedItem.parsed.label ?? 'unlabeled'}
+                </Badge>
+              </Group>
+            </Group>
 
           <Paper withBorder radius="md" p="sm">
             <Stack gap={4}>
@@ -73,9 +126,11 @@ export function CaseDetailPanel({
             onNoteChange={onNoteChange}
             onDecision={onDecision}
             history={history}
+            readOnly={readOnly}
           />
         </Stack>
-      </ScrollArea.Autosize>
-    </Paper>
+        </ScrollArea.Autosize>
+      </Paper>
+    </>
   )
 }

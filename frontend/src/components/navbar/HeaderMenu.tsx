@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import { ActionIcon, Button, Container, Group, useMantineColorScheme, useComputedColorScheme } from '@mantine/core'
-import { IconBrightnessDown, IconMoon, IconLogout, IconUser, IconLayoutDashboard, IconHome } from '@tabler/icons-react'
+import { IconBrightnessDown, IconMoon, IconLogout, IconUser, IconLayoutDashboard, IconHome, IconUsers } from '@tabler/icons-react'
 import classes from './HeaderMenu.module.css'
 import { useNavigate } from "@tanstack/react-router"
 import { getToken, logout } from '@/lib/auth'
@@ -8,12 +9,23 @@ export function HeaderMenu() {
   const { colorScheme, setColorScheme } = useMantineColorScheme()
   const computedColorScheme = useComputedColorScheme('light')
   const navigate = useNavigate()
+  const [userRole, setUserRole] = useState<number | null>(null)
 
   const toggleColorScheme = () => {
     setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')
   }
 
   const isLoggedIn = !!getToken()
+
+  useEffect(() => {
+    if (!isLoggedIn) { setUserRole(null); return }
+    fetch('http://localhost:8000/api/v1/users/me', {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(user => user && setUserRole(user.role))
+      .catch(() => {})
+  }, [isLoggedIn])
 
   return (
     <header className={classes.header}>
@@ -46,6 +58,16 @@ export function HeaderMenu() {
                 >
                   Profile
                 </Button>
+                {userRole === 3 && (
+                  <Button
+                    variant="default"
+                    size="sm"
+                    leftSection={<IconUsers size={16} />}
+                    onClick={() => navigate({ to: '/app/users' })}
+                  >
+                    Users
+                  </Button>
+                )}
               </>
             )}
           </Group>

@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime, timezone
+from enum import IntEnum
 
 from pydantic import EmailStr
 from sqlalchemy import DateTime
@@ -10,11 +11,17 @@ def get_datetime_utc() -> datetime:
     return datetime.now(timezone.utc)
 
 
+class UserRole(IntEnum):
+    viewer = 1
+    analyst = 2
+    superuser = 3
+
+
 # Shared properties
 class UserBase(SQLModel):
     email: EmailStr = Field(unique=True, index=True, max_length=255)
     is_active: bool = True
-    is_superuser: bool = False
+    role: UserRole = UserRole.viewer
     full_name: str | None = Field(default=None, max_length=255)
 
 

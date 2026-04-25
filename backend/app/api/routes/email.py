@@ -3,12 +3,14 @@ from typing import Annotated
 import uuid
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
+from fastapi.responses import PlainTextResponse
 from jsonschema import ValidationError
 from pydantic import BaseModel
 from sqlmodel import Session, delete, select
 
 from app import crud
-from app.api.deps import CurrentUser
+from app.api.deps import CurrentUser, require_min_role
+from app.models.user import UserRole
 from app.core.db import get_db
 from app.models.email import EmailEvent, EmailAction, EmailParsed, EmailResolution, EmailResolutionBase
 from app.services.email_filesystem import (
@@ -147,6 +149,31 @@ async def get_message(
     message = db.get(EmailParsed, message_id)
     resolution = db.get(EmailResolution, message_id)
     return {"event": event, "message": message, "resolution": resolution}
+
+
+@router.get(
+    '/message/{message_id}/raw',
+    response_class=PlainTextResponse,
+    dependencies=[require_min_role(UserRole.analyst)],
+)
+async def get_raw_email(
+        message_id: uuid.UUID,
+        db: Session = Depends(get_db),
+) -> str:
+    from pathlib import Path
+    from app.services.email_filesystem import DONE_DIR
+    event = db.get(EmailEvent, message_id)
+    if not event:
+        raise HTTPException(status_code=404, detail="Email event not found")
+    raw_path = Path(event.raw_path)
+    if not raw_path.exists():
+        # Fallback: file may have been archived before raw_path tracking was added
+        fallback = DONE_DIR / raw_path.name
+        if fallback.exists():
+            raw_path = fallback
+        else:
+            raise HTTPException(status_code=404, detail="Raw email file not found")
+    return raw_path.read_bytes().decode("utf-8", errors="replace")
 
 
 @router.post('/message/{message_id}/resolve')

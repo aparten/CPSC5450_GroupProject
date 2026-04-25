@@ -114,12 +114,15 @@ def set_email_event_status(
     status: EmailStatus,
     error: Optional[str] = None,
     processed_at: Optional[datetime] = None,
+    raw_path: Optional[str] = None,
 ) -> None:
     row = session.get(EmailEvent, event_id)
     if row is None:
         return
     row.status = status
     row.error = error
+    if raw_path is not None:
+        row.raw_path = raw_path
     if processed_at is not None:
         row.processed_at = processed_at
     if processed_at is None and status in (EmailStatus.done, EmailStatus.failed):

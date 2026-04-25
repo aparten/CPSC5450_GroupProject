@@ -52,3 +52,12 @@ export function fetchMessages(): Promise<EmailEventResponse[]> {
 export function fetchMessageDetail(eventId: string): Promise<MessageDetailResponse> {
   return apiFetch(`/email/message/${eventId}`)
 }
+
+export async function fetchRawEmail(eventId: string): Promise<string> {
+  const token = getToken()
+  const res = await fetch(`${API_BASE}/email/message/${eventId}/raw`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  })
+  if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`)
+  return res.text()
+}

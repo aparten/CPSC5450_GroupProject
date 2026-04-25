@@ -47,8 +47,8 @@ def parse_inbox_email(self, event_id: str, processing_path: str) -> dict:
             crud.upsert_email_parsed(session, event_id=event_uuid, payload=payload)
             t3 = time.perf_counter()
 
-            archive_raw_success(Path(processing_path))
-            crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.done)
+            done_path = archive_raw_success(Path(processing_path))
+            crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.done, raw_path=str(done_path))
 
             logger.info(
                 "email %s: parse=%.0fms triage=%.0fms db=%.0fms total=%.0fms",

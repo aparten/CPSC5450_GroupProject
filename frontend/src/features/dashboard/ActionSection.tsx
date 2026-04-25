@@ -8,6 +8,7 @@ type ActionSectionProps = {
   onNoteChange: (value: string) => void
   onDecision: (status: QueueStatus) => void
   history: DecisionEntry[]
+  readOnly?: boolean
 }
 
 export function ActionSection({
@@ -16,6 +17,7 @@ export function ActionSection({
   onNoteChange,
   onDecision,
   history,
+  readOnly,
 }: ActionSectionProps) {
   return (
     <Paper withBorder radius="md" p="sm" bg="var(--mantine-color-gray-0)">
@@ -29,24 +31,32 @@ export function ActionSection({
           </Badge>
         </Group>
 
-        <Textarea
-          value={note}
-          onChange={(event) => onNoteChange(event.currentTarget.value)}
-          placeholder="Required before decision"
-          minRows={2}
-        />
+        {readOnly ? (
+          <Text size="sm" c="dimmed" fs="italic">
+            View only — analyst access required to take action.
+          </Text>
+        ) : (
+          <>
+            <Textarea
+              value={note}
+              onChange={(event) => onNoteChange(event.currentTarget.value)}
+              placeholder="Required before decision"
+              minRows={2}
+            />
 
-        <Group grow>
-          <Button color="green" onClick={() => onDecision('approved')} disabled={!note.trim()}>
-            Approve
-          </Button>
-          <Button color="red" onClick={() => onDecision('rejected')} disabled={!note.trim()}>
-            Reject
-          </Button>
-          <Button variant="light" onClick={() => onDecision('needs review')} disabled={!note.trim()}>
-            Needs Review
-          </Button>
-        </Group>
+            <Group grow>
+              <Button color="green" onClick={() => onDecision('approved')} disabled={!note.trim()}>
+                Approve
+              </Button>
+              <Button color="red" onClick={() => onDecision('rejected')} disabled={!note.trim()}>
+                Reject
+              </Button>
+              <Button variant="light" onClick={() => onDecision('needs review')} disabled={!note.trim()}>
+                Needs Review
+              </Button>
+            </Group>
+          </>
+        )}
 
         <Stack gap="xs">
           <Text c="dimmed" size="xs" tt="uppercase">

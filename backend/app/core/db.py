@@ -19,7 +19,7 @@ def init_db() -> None:
     import app.models.email
     import app.models.audit
     from app import crud
-    from app.models.user import UserCreate
+    from app.models.user import UserCreate, UserRole
 
     SQLModel.metadata.create_all(engine)
 
@@ -34,7 +34,7 @@ def init_db() -> None:
                     email=settings.FIRST_SUPERUSER_EMAIL,
                     password=settings.FIRST_SUPERUSER_PASSWORD,
                     full_name=settings.FIRST_SUPERUSER_FULL_NAME,
-                    is_superuser=True,
+                    role=UserRole.superuser,
                     is_active=True,
                 ),
             )

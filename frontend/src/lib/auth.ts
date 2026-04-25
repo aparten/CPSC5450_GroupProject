@@ -16,6 +16,29 @@ export function clearToken(): void {
   localStorage.removeItem(TOKEN_KEY)
 }
 
+export async function requireSuperuser() {
+  if (typeof window === 'undefined') return
+
+  const token = getToken()
+  if (!token) throw redirect({ to: '/auth/login' })
+
+  try {
+    const res = await fetch(`${API_BASE}/users/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (!res.ok) {
+      clearToken()
+      throw redirect({ to: '/auth/login' })
+    }
+    const user = await res.json()
+    if (user.role < 3) throw redirect({ to: '/app/dashboard' })
+  } catch (err) {
+    if (err && typeof err === 'object' && 'to' in err) throw err
+    clearToken()
+    throw redirect({ to: '/auth/login' })
+  }
+}
+
 export async function requireAuth() {
   // Skip auth check during SSR — localStorage is not available on the server.
   // The client-side hydration will re-run beforeLoad and enforce auth.

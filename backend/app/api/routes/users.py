@@ -19,6 +19,7 @@ from app.models.user import (
     UserCreate,
     UserPublic,
     UserRegister,
+    UserRole,
     UsersPublic,
     UserUpdate,
     UserUpdateMe,
@@ -123,7 +124,7 @@ def delete_user_me(session: SessionDep, current_user: CurrentUser) -> Any:
     """
     Delete own user.
     """
-    if current_user.is_superuser:
+    if current_user.role >= UserRole.superuser:
         raise HTTPException(
             status_code=403, detail="Super users are not allowed to delete themselves"
         )
@@ -158,7 +159,7 @@ def read_user_by_id(
     user = session.get(User, user_id)
     if user == current_user:
         return user
-    if not current_user.is_superuser:
+    if current_user.role < UserRole.superuser:
         raise HTTPException(
             status_code=403,
             detail="The user doesn't have enough privileges",

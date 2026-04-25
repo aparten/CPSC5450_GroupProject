@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react'
 import { Avatar, Container, Loader, Paper, Stack, Text, Title } from '@mantine/core'
 import { IconUser } from '@tabler/icons-react'
 import { getToken } from '@/lib/auth'
-
-type User = {
-  id: string
-  email: string
-  full_name: string | null
-  is_active: boolean
-  is_superuser: boolean
-}
+import { ROLE_LABELS, type User } from '@/lib/types'
 
 export function ProfilePage() {
   const [user, setUser] = useState<User | null>(null)
@@ -87,7 +80,7 @@ export function ProfilePage() {
 
           <Paper withBorder p="sm" radius="sm">
             <Text size="xs" c="dimmed">Role</Text>
-            <Text>{user.is_superuser ? 'Admin' : 'Analyst'}</Text>
+            <Text>{ROLE_LABELS[user.role] ?? 'Unknown'}</Text>
           </Paper>
 
           <Paper withBorder p="sm" radius="sm">

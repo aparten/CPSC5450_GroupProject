@@ -5,9 +5,10 @@ type DashboardHeaderProps = {
   queue: QueueItem[]
   onProcessEmails: () => void
   isProcessing: boolean
+  readOnly?: boolean
 }
 
-export function DashboardHeader({ queue, onProcessEmails, isProcessing }: DashboardHeaderProps) {
+export function DashboardHeader({ queue, onProcessEmails, isProcessing, readOnly }: DashboardHeaderProps) {
   return (
     <Group justify="space-between" align="flex-end">
       <div>
@@ -23,13 +24,15 @@ export function DashboardHeader({ queue, onProcessEmails, isProcessing }: Dashbo
         <Badge variant="light" color="red">
           {queue.filter((item) => item.ui.severity === 'critical').length} critical
         </Badge>
-        <Button
-          size="sm"
-          loading={isProcessing}
-          onClick={onProcessEmails}
-        >
-          Process Emails
-        </Button>
+        {!readOnly && (
+          <Button
+            size="sm"
+            loading={isProcessing}
+            onClick={onProcessEmails}
+          >
+            Process Emails
+          </Button>
+        )}
       </Group>
     </Group>
   )
