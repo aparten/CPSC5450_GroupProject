@@ -1,0 +1,25 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: analyst@soc.internal
+Subject: Reminder: Team standup at 10am
+Date: Mon, 22 Jan 2024 11:00:00 +0000
+Message-ID: <55fd87a7-7ff4-4ce4-b290-a7f36d826ed9@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+trying to report spam [razor chooses hubris] I timeout on the connection
+(which seems to have gotten slower all morning) and receive the following
+error message:razor-report error: connect4: nextserver: discover1: Error read=
+ing socket
+connect4: nextserver: discover1: Error reading socketI then try to run razor-=
+admin -discover and receive the same error .....
+problems with the servers today? only one discovery server?Sven--------------=
+-----------------------------------------
+This sf.net email is sponsored by:ThinkGeek
+Welcome to geek heaven.
+http://thinkgeek.com/sf
+_______________________________________________
+Razor-users mailing list
+Razor-users@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/razor-users

@@ -1,0 +1,239 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Sat, 03 Aug 2024 13:00:00 +0000
+Message-ID: <3bf6b59a-a6cb-41bd-9481-11f1d7335bb4@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!--
+ body      { BACKGROUND-IMAGE: url(http://images.lockergnome.com/images/issue=
+/top-right.gif); color: #990000 }
+ a:link    { COLOR: #000000; TEXT-DECORATION: underline; font-weight: normal }
+ a:visited { COLOR: #C84200; TEXT-DECORATION: underline; font-weight: normal }
+ a:active  { COLOR: GRAY; text-decoration: none }
+ a:hover   { color: GRAY; TEXT-DECORATION: none }
+ p.title   { BACKGROUND: #FFCC99; BORDER-BOTTOM: #FF9966 4px solid; BORDER-LE=
+FT: #FFEEDD 4px solid; BORDER-RIGHT: #FF9966 4px solid; BORDER-TOP: #FFEEDD 4=
+px solid; COLOR: #990000; FONT-FAMILY: Comic Sans MS, Trebuchet MS, Helvetica=
+, Arial; FONT-SIZE: 14pt; FONT-WEIGHT: normal }
+ p.sidebar { BACKGROUND: #FFEEDD; TEXT-ALIGN: center; BORDER-BOTTOM: #FFCC99 =
+3px solid; BORDER-LEFT: #FFFFFF 3px solid; BORDER-RIGHT: #FFCC99 3px solid; B=
+ORDER-TOP: #FFFFFF 3px solid; COLOR: #990000; FONT-FAMILY: Comic Sans MS, Tre=
+buchet MS, Helvetica, Arial; FONT-SIZE: 10pt; FONT-WEIGHT: bold }=20
+ .url      { font-size: 8pt; font-family: Verdana, Tahoma, Arial }
+-->
+20020718 Lockergnome Windows Daily
+=C3=82=C2=A0 07.18.2002 GnomeREPORT GET WINDOWS XP TIPS: Months after the rel=
+ease of Windows XP Professional and Home editions, people are still learning =
+the nuances of Microsoft's newest operating system. Whether you've been using=
+ it for a while or are planning to upgrade to the new OS soon, this ebook is =
+right up your alley. GET YOUR COPY of Lockergnome's Top 50 Windows XP tips no=
+w!    I don't go to many concerts, but that doesn't mean I don't
+appreciate listening to good
+music at every waking moment. Tonight, a handful of Bay
+Gnomies and I watched They Might Be Giants rock the Fillmore.
+Melanie, Steve, Brent, Missy, Robert, Patrick, Gretchen, Matt, and
+Mindy had a total blast. Well, it wasn't much fun when Robert got
+his digital camera confiscated - but this was a show worthy of
+five megapixels
+(believe me)! Brent went to
+the show last night, and I saw them play on the set earlier this
+afternoon. They were selling a new CD (which had JUST been
+released the other day); "They Got Lost" is full of a few
+previously-unavailable tracks. If you aren't sure about purchasing
+it outright, I strongly urge you to sign up for a trial EMusic account and do=
+wnload
+a few of their songs in MP3 format. Oh, and check out the opening
+act: Noe Venable. She's got
+a few free MP3s on
+her site, too. Give "Boots" a shot - very nice.Does anybody know how to set a=
+ binary clock? Melanie got it for me
+as a gift (which was a very nice gesture). Sure, I could read the
+manual - but the ones and zeros start to look eerily similar after
+flipping past the first page. You know me: I'm not much of a math
+guy. In fact, I just discovered the other day that 'byte' was
+short for 'by eight' (even though I already knew that 'bit'
+represented 'binary digit'). I'd stick with a digital timepiece,
+but it just isn't geeky enough for me anymore. How sad is that?
+I'm ready to walk on the wild side. Maybe I'll get my laptop
+pierced tomorrow? It could happen. I've been known to do nutty
+things on a moment's notice, like changing my default Web browser.
+Courtesy of Asa
+Dotzler, I have an official Mozilla sticker, CD, and t-shirt
+(which you saw me model in my Webcam the other day). Don't be too
+jealous; Mozilla.org has
+plenty of goodies to go around.Looks as though Jake
+and Lori are already having a blast in St. Louis.
+They're at the Shareware Industry Conference, along with hundreds
+of well-known program programmers - the people who make our
+computers work the way we want them to work! We're doing our best
+to convince them to join us at Gnomedex. They ask: "Who else
+is going to be there?" We answer: "People who don't know you yet."
+They ask: "Then why should I come?" We answer: "Because it's a
+business opportunity for you." They ask: "What if I don't want to
+learn anything or meet anybody?" We answer: "We can't really help
+you there, but here - have lunch on us." They ask: "Oh, the
+admission price includes food at at Gnomedex?" We answer: "We
+cannot provide every meal, but you won't go hungry." They ask:
+"So, why Des Moines, when there's nothing to do there." We answer:
+"You're 100% wrong. There *IS* something to do there: Gnomedex."
+Get it? Got it? Good.See You in August,=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=
+=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=
+=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0Chris Pirillo=C3=82=
+=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0=C3=82=C2=A0
+=C3=82=C2=A0GnomeDOWNLOADSLatest Downloads
+VisiTrax Lite 2.91
+mp3DirectCut 1.23
+Cpick 2.6
+Image Browser 4.4
+EZ JavaScript 1.1
+WinHTTrack 3.20RC5
+Panda Quick Rem 3.2.1.0
+EZBack-it-up 1.1
+ArtSee 1.0
+Soliton 2
+Fresh Download 4.30GigAlarm v1.201 [33k] W9x/2k/XP FREEhttp://users.bigpond.n=
+et.au/glina/GigAlarm.htm{String on your finger} Sometimes, I'm a bit like the=
+ absent-minded professor... I would forget my own head if it wasn't attached.=
+ So naturally, I appreciate any program that can help keep me on track, and w=
+ith GigAlarm I can setup whatever reminders/alarms I need. However, sometimes=
+ a simple text message just won't catch my attention. Well, herein lies the b=
+eauty of GigAlarm... it doesn't just have to give you a text alarm! GigAlarm =
+can play a WAV file (random, or your selection), change your background, star=
+t a program, or use one of the many Windows shutdown options. My wife has got=
+ten in the habit of using the Shutdown option as an alarm to signal that I ha=
+ve spent too long on the computer. (Lucky for me, there is a snooze button!) =
+NOTE: The author says, "This program is essentially free to use for non-profi=
+t purposes... If you find this program useful I would appreciate $10 AUD (or =
+$5 USD) as a token of your appreciation."Context Thumbview v1.0.b1 [107k] W9x=
+/2K/XP FREEhttp://contextmagic.netfirms.com/image-viewer/{Peep show} I'm not =
+always very patient, especially when it comes to my computer. Double-clicking=
+ on an image and waiting for it to come up in my image viewer is almost too m=
+uch for me to handle. Lucky for me, Context Thumbview has made its way onto m=
+y system and I no longer have to wait to view an image. All I do now is right=
+-click the image, choose "View Thumbnail," and there is the image, out there =
+for me to see... all without me having to open up any programs! "As Express T=
+humbView is an Explorer extension, it is always ready and available for use. =
+Moreover, it is available in any Explorer window, including Open and Save As.=
+.. dialog boxes." As an added bonus, with Context Thumbview installed on my s=
+ystem, I can also turn off the thumbnail view if I want to save system resour=
+ces.
+Recommend It!
+=C3=82=C2=A0GnomeCLICKS
+=C3=82=C2=A0GnomeSYSTEM
+Starter v5.5.4.2175 [423k] W9x/2k/XP FREEhttp://codestuff.tripod.com/{Startup=
+ manager} This application bills itself as "Yet Another Startup Manager"... I=
+ don't think so! Starter isn't JUST another Startup Manager, it's a piece of =
+programming art. One of my biggest problems with Windows Task Manager is that=
+ I don't know what all the processes on my machine are, or from where they ar=
+e running. Starter not only gives me that information, but it also lets me sa=
+ve it as an HTML file. In addition, Starter lets me import and export registr=
+y keys or add a new task to be processed. Don't run all over your machine try=
+ing to find all the programs you need to control your PC, when you can do it =
+all (and more!) with Starter.Recommend It!
+=C3=82=C2=A0GnomeWILDCARD
+Aversoft Sticker v3.55 [592k] W9x/2k/XP US$15
+    Unearthed by Sergei Lepyokhinhttp://www.aversoft.com/sticker/{Sticky note=
+s} Did you know that Post-it(r) Notes were invented by accident? I use to hav=
+e these notes all over my monitor. Now my screen is clean as a whistle! Avers=
+oft Sticker is a program to help you remember "important information by displ=
+aying skinnable sticky notes on your Windows desktop." No more bland notes fo=
+r me! With Sticker, I am surrounded with pictures of paradise (downloaded fro=
+m Aversoft's website). These great features are no accident. Sticker also has=
+ a transparency feature that makes the notes only half visible, making it muc=
+h easier to use while working on your other programs. Don't walk away yet tho=
+ugh... Sticker also allows you to print your notes, lock them from accidental=
+ly being deleted, and set an alarm (repeating or one-time). Speaking of alarm=
+s, mine just went off and opened up Outlook. Time to send out today's newslet=
+ter!Submit Your Thoughts | Recommend It!
+=C3=82=C2=A0GnomeFAVORITECAREER SERVICES FROM LOCKERGNOME AND DICE.COM: We've=
+ teamed up with Dice.com to bring you a full service I.T. career enhancement =
+solution. Whether you are looking for your dream job or trying to hire talent=
+ed people, the full-featured career resource center is the place to start. Fi=
+nd your IT talent solution today!  Wikipedia Encyclopediahttp://www.wikipedia=
+.com/{We is smart} Those Saturday morning folks at ABC were right: it's great=
+ to learn, 'cause knowledge is power. I highly encourage everyone to learn so=
+mething new each day, and with Wikipedia.com you can! Wikipedia is a free, an=
+d very thorough online encyclopedia; you'll be hard-pressed to stump this inf=
+ormation tool with an undocumented topic. Know what you're looking for? Then =
+just use the search tool. In the mood to fill your cranium with a few new tho=
+ught processes? Just browse through any one of Wikipedia's many categories un=
+til you find a subject that piques your interest. From Physics to Opera; from=
+ Anthropology to Cooking, you will find it all here. Now, all that is missing=
+ is you! Take a look and beef up your gray matter.
+Recommend It!
+=C3=82=C2=A0GnomeTIPGnomies are known for their willingness to help others an=
+d Alex Warren is no exception with a tip on copying text. Alex writes: "Did y=
+ou know that you can copy the contents of a message/dialog box just by pressi=
+ng Ctrl+C?" Alex also had this to say: "When you select text and then use the=
+ mouse to drag it to a new location, the original text moves to the new locat=
+ion and disappears from the old location. However, you can select text and th=
+en use the right mouse button to drag it to a new location. When you do this,=
+ releasing the right mouse button opens a menu from which you can choose to m=
+ove or copy the text (along with several other options)." Those are some grea=
+t time saving tips Alex! Following suit with using Ctrl + C to copy... you ca=
+n also use Ctrl + X to cut and Ctrl + V to paste. You can also use all these =
+tips on more then just text! The next time you need to copy some files on you=
+r PC, try the right-click and drag method and you will see what I mean... alo=
+ng with saving yourself some time.
+Recommend It!http://www.lockergnome.com/issues/daily/20020718.html
+Your subscribed e-mail address is: [qqqqqqqqqq-lg@spamassassin.taint.org] - T=
+o unsubscribe or change your delivery address, please visit the subscription =
+management page. For further information, please refer to the GnomeCREDITS in=
+ the sidebar.LOOK OVER HERE=C3=82=C2=A0Download Our Tip Files=C3=82=C2=A0Late=
+st Windows Daily
+=C3=82=C2=A0Latest Digital Media
+=C3=82=C2=A0Latest Tech Specialist
+=C3=82=C2=A0Latest Penguin Shell
+=C3=82=C2=A0Latest Apple Core
+=C3=82=C2=A0Latest Web Weekly
+=C3=82=C2=A0Latest Bits & Bytes=C3=82=C2=A0Find the Lowest Price=C3=82=C2=A0S=
+uggest a Feature
+=C3=82=C2=A0Advertise With Us
+=C3=82=C2=A0The GnomeSTORE
+=C3=82=C2=A0High-Tech Job Search
+=C3=82=C2=A0Chat With Gnomies
+=C3=82=C2=A0Watch The Webcams
+=C3=82=C2=A0Computer Power User=C3=82=C2=A0Read Past Issues
+=C3=82=C2=A0Download X-Setup
+=C3=82=C2=A0About Lockergnome
+=C3=82=C2=A0Our Privacy Policy
+=C3=82=C2=A0View More Options
+=C3=82=C2=A0Our XML / RSS Feed
+=C3=82=C2=A0Syndicate Our Tips
+=C3=82=C2=A0Link To Lockergnome
+=C3=82=C2=A0Get Chris's Book=C3=82=C2=A0Tell a Friend About Us!=C3=82=C2=A0Ge=
+neral Feedback
+=C3=82=C2=A0E-mail the Editor
+=C3=82=C2=A0The Editor's Blog
+=C3=82=C2=A0
+SEARCH
+=C3=82=C2=A0GNOMESPECIALS
+=C3=82=C2=A0Manage Your Workgroup
+=C3=82=C2=A0Form Pilot
+=C3=82=C2=A0Say the Time 5.0
+=C3=82=C2=A0Boomer - Stream Now
+=C3=82=C2=A0Create Web/CD catalog
+=C3=82=C2=A0Easy Web Editor
+=C3=82=C2=A0Kleptomania
+=C3=82=C2=A0Tag&Rename
+=C3=82=C2=A0Pretty Good Solitaire
+=C3=82=C2=A0Visualize Color Combos
+=C3=82=C2=A0FirstStop WebSearch
+=C3=82=C2=A0Ecobuilder
+=C3=82=C2=A0Book Collector
+Get Listed Here
+Question: which group is 250,000+ strong and always looking for stuff to make=
+ their personal and professional lives run smoother?=20
+=C3=82=C2=A0HAPPY FUN STUFF
+And now, we see how Sprocket thinks he has a right to eat pumpkin seeds. Or, =
+would that be "pupkin" seeds?Not for the Puppy
+=C3=82=C2=A0
+CLICK HERE TO ZOOM=C3=82=C2=A0=C3=82=C2=A0
+BYTE ME NOW=C3=82=C2=A92002, Lockergnome LLC. ISSN: 1095-3965. All Rights Res=
+erved. Please read our Terms of Service. Our Web site is hosted by DigitalDaz=
+e. Domain registered at DNS Central.Bacteria acts more intelligent than human=
+ beings.

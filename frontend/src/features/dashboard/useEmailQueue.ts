@@ -3,19 +3,23 @@ import { fetchMessageDetail, fetchMessages } from '@/lib/api'
 import { fromMessageDetail, fromEmailEvent } from './adapters'
 import type { QueueItem } from './types'
 
-const POLL_INTERVAL_MS = 10_000
+const POLL_MS = 10_000
+const FAST_POLL_MS = 2_000
 
 export function useEmailQueue() {
   const [queue, setQueue] = useState<QueueItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const [hasPending, setHasPending] = useState(false)
 
   const load = useCallback(async () => {
     try {
       const events = await fetchMessages()
+      const hasPending = events.some((e) => e.status === 'queued' || e.status === 'processing')
+      setHasPending(hasPending)
 
-      // For each event that finished processing, fetch its parsed detail
       const items = await Promise.all(
         events.map(async (event) => {
           if (event.status === 'done') {
@@ -32,7 +36,6 @@ export function useEmailQueue() {
       )
 
       setQueue((prev) => {
-        // Preserve any analyst decisions (status overrides) from the previous state
         const decisionMap = new Map<string, QueueItem['ui']['status']>()
         for (const old of prev) {
           if (old.ui.status !== 'needs review') {
@@ -50,8 +53,10 @@ export function useEmailQueue() {
       })
 
       setError(null)
+      timeoutRef.current = setTimeout(load, hasPending ? FAST_POLL_MS : POLL_MS)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load email queue')
+      timeoutRef.current = setTimeout(load, POLL_MS)
     } finally {
       setLoading(false)
     }
@@ -59,11 +64,10 @@ export function useEmailQueue() {
 
   useEffect(() => {
     load()
-    intervalRef.current = setInterval(load, POLL_INTERVAL_MS)
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
   }, [load])
 
-  return { queue, setQueue, loading, error, refresh: load }
+  return { queue, setQueue, loading, error, hasPending, refresh: load }
 }

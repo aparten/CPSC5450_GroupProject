@@ -1,0 +1,28 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Sat, 08 Jun 2024 19:00:00 +0000
+Message-ID: <3acc622a-d613-4742-8fc6-271b33bd1813@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+schedule crawler : hourahead failure start date : 1 / 20 / 02 ; hourahead hou=
+r : 13 ; hourahead schedule download failed . manual intervention required . =
+log messages : parsing file - - > > o : \ portland \ westdesk \ california sc=
+heduling \ iso final schedules \ 2002012013 . txt error : dbcaps 97 data : ca=
+nnot perform this operation on a closed database ! ! ! unknown database . ali=
+as : dbcaps 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unk=
+nown database . alias : dbcaps 97 data error : dbcaps 97 data : cannot perfor=
+m this operation on a closed database ! ! ! unknown database . alias : dbcaps=
+ 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unknown databa=
+se . alias : dbcaps 97 data error : dbcaps 97 data : cannot perform this oper=
+ation on a closed database ! ! ! unknown database . alias : dbcaps 97 data ! =
+! ! unknown database . alias : dbcaps 97 data error : dbcaps 97 data : cannot=
+ perform this operation on a closed database error : dbcaps 97 data : cannot =
+perform this operation on a closed database error : dbcaps 97 data : cannot p=
+erform this operation on a closed database ! ! ! unknown database . alias : d=
+bcaps 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unknown d=
+atabase . alias : dbcaps 97 data error : dbcaps 97 data : cannot perform this=
+ operation on a closed database

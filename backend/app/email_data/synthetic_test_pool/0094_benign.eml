@@ -1,0 +1,59 @@
+From: Eve Nguyen <eve.nguyen@consulting.co>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Sun, 06 Oct 2024 05:00:00 +0000
+Message-ID: <03021923-284f-4541-adfe-1fc88362eaae@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+special issue jetai call for papers journal of experimental and theoretical a=
+rtificial intelligence special issue on memory-based language processing memo=
+ry - based language processing ( mblp ) views language processing as being ba=
+sed on the direct reuse of previous experience rather than on the use of abst=
+ractions extracted from that experience . in such a framework , language acqu=
+isition is modeled as the storage of exemplars , and language processing as s=
+imilarity-based reasoning . mblp derives from work in artificial intelligence=
+ ( case-based reasoning , memory-based reasoning , instance-based learning , =
+lazy learning ) , linguistics ( analogical modeling ) , computational linguis=
+tics ( example-based machine translation , case-based language processing , d=
+ata-oriented parsing ) , and statistical pattern recognition ( k-nn models ) =
+. in recent research , it has been shown that the application of algorithms b=
+ased on this framework leads to accurate and efficient language models in div=
+erse language processing areas ( phonology , morphology , syntax , semantics =
+, discourse ) . we invite theoretical papers on models , algorithms and metri=
+cs for memory-based language processing , and empirical studies comparing mbl=
+p variants to each other or to alternative non-memory - based approaches for =
+specific language processing tasks . time table deadline for submissions : se=
+ptember 1 , 1998 notification date : november 1 , 1998 deadline for final ver=
+sions : january 1 , 1999 special issue : summer or autumn 1999 instructions f=
+or authors : 1 . the original manuscript and three clear copies should be sub=
+mitted to : walter daelemans ( guest editor ) ilk research group , computatio=
+nal linguistics tilburg university warandelaan 2 5037 gc tilburg building b ,=
+ room 307 the netherlands + 31 13 4663070 ( phone ) + 31 13 4663110 ( fax ) w=
+alter . daelemans @ kub . nl all papers will be refereed by at least three re=
+viewers . 2 . all papers must be in english . the entire manuscript should be=
+ typed on one side only of plain paper , either a4 or 8 . 5 x 11 inch , with =
+double spacing used throughout . 3 . the first page of the manuscript should =
+carry the title , the names , institutional addresses , and institutional tel=
+ephone numbers of the authors , and a short title of no more than 50 characte=
+rs ( including spaces ) to be used as a running head . the second page of the=
+ manuscript should carry an abstract of about 200 words . the remainder of th=
+e text should not exceed 30 double spaced pages , including references but ex=
+cluding figures and tables . all figures and tables must be referred to by nu=
+mber in the text . 4 . an original set of professional quality figures should=
+ accompany the manuscript . line drawing may be india ink originals or glossy=
+ prints . halftone illustrations must be submitted as glossy prints . illustr=
+ations cannot be printed in color . 5 . tables should be typed on separate pa=
+ges , which should accompany the text . 6 . the text should be written in thi=
+rd person to facilitate blind reviewing . the names of the authors or their i=
+nstitutions should appear only on the title page . 7 . the name-date style sh=
+ould be used for all references . all authors ' names should be included in t=
+he reference list . journal names should not be abbreviated . inclusive page =
+numbers must be given for all references to articles in journals , proceeding=
+s volumes , or books . with the exception of theses or dissertations , unpubl=
+ished works should not be included as references . 8 . footnotes may not be u=
+sed . endnotes may be used if necessary ; they should be collected on separat=
+e sheets at the end of the text . 9 . fifty free offprints will be provided t=
+o the first author of each paper . there will be no page charges .

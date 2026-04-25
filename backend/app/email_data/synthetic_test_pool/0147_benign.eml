@@ -1,0 +1,40 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: analyst@soc.internal
+Subject: Reminder: Team standup at 10am
+Date: Tue, 05 Nov 2024 20:00:00 +0000
+Message-ID: <b8ae159d-cf0c-4f42-99a1-bab0a284e216@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+
+cwg-dated-1033065967.2dc492@DeepEddy.Com said:
+> From:  Chris Garrigues=20
+> Date:  Wed, 28 Aug 2002 11:07:01 -0500 >
+> Here's a fix that I think will make a real difference.
+>=20
+> Ftoc_ShowSequences needs to be able to be called with an optional
+> list of msgids=20
+> to update and if it's called that way it only removes or adds tags
+> for those=20
+> messages.  Then in places like MsgChange, we only update the
+> messages which have
+> changed.
+>=20
+> Also, a separate Ftoc_ShowSequence function which only updates the
+> display of=20
+> one sequence should be written which also takes an optional list of
+> msgids.
+>  =20
+> In a place like MsgChange, it would only need to update the cur
+> sequence.
+>=20
+> If nobody else gets to it, I'll do this when I get back.> I just checked th=
+is in.  Let me know if it helps.> Chris Congratulations Chris, you just made =
+the hall of fame!! Speed is much better now. I haven't done any tests, but I'=
+d say that latency dropped 2-3 times and we're back in good shape again.Well =
+done!/Anders_______________________________________________
+Exmh-workers mailing list
+Exmh-workers@redhat.com
+https://listman.redhat.com/mailman/listinfo/exmh-workers

@@ -1,0 +1,22 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Mon, 10 Jun 2024 11:00:00 +0000
+Message-ID: <ba04e5b8-b354-41b8-92bc-975022d18c66@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+fw : request closed : access request for bill . williams . iii @ enron . com =
+bill - your public folder is located in public folder / other enron entities =
+/ enron north america / portland / bill williams iii . if you want help organ=
+izing your inbox so certain e - mail automatically saves into your public fol=
+der , just let me know . thanks , kate - - - - - original message - - - - - f=
+rom : arsystem [ mailto : arsystem @ mailman . enron . com ] sent : wednesday=
+ , september 12 , 2001 12 : 14 pm to : symes , kate subject : request closed =
+: access request for bill . williams . iii @ enron . com the request has been=
+ completed with all resources requested either completed or rejected . you ca=
+n view the details of the request by clicking http : / / itcapps . corp . enr=
+on . com / srrs / auth / emaillink . asp ? id =3D 000000000058321 & page =3D =
+myreq .

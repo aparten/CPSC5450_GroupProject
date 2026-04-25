@@ -70,6 +70,9 @@ services:
       - --app
       - app.tasks.worker:app
       - worker
+      - --concurrency=4
+      - --prefetch-multiplier=1
+      - --loglevel=info
     environment:
       REDIS_DSN: "redis://:password123@redis"
       POSTGRES_DSN: "postgresql://username:password@postgres:5432/default_database"

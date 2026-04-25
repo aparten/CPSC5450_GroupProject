@@ -1,0 +1,35 @@
+From: Alice Johnson <alice.johnson@university.edu>
+To: security-team@soc.internal
+Subject: Project update for Q235
+Date: Wed, 26 Jun 2024 23:00:00 +0000
+Message-ID: <c970a75f-fe01-4e59-a9f2-2463f5e2f720@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+On Wed, 11 Sep 2002 01:24:46 +0200=20
+Robert Waldner  wrote:
+> On Tue, 10 Sep 2002 09:27:12 PDT, J C Lawrence writes:>> I run exmh on my d=
+esktops at home and at work with the resulting exmh
+>> windows being displayed on both my work and home desktops (gratis SSH
+>> X11 forwarding).  In fact, your message was read and replied to (this
+>> message) while at work, using an exmh instance running on my home
+>> machine.> So you have 4 copies (1+1 per desktop) of exmh running?Yes.One o=
+f the nicer aspects of exmh's colour handling is that while I have
+the default background for the message pane set to black, the second
+insance of exmh displaying to a given $DISPLAY will set the background
+of the message pane to darkslategray.  Very nice as it provides an
+instant visual cue as to which is which.  (No: I've not checked where it
+gets that colour selection from).> That's what I usually do, but what I'd rea=
+lly like would be some
+> automagism to tell them "Flist", "Rescan Folder", which I now do
+> manually whenever I'm going to work at the "other" machine.--=20
+J C Lawrence               =20
+---------(*)                Satan, oscillate my metallic sonatas.=20
+claw@kanga.nu               He lived as a devil, eh?		 =20
+http://www.kanga.nu/~claw/  Evil is a name of a foeman, as I live.___________=
+____________________________________
+Exmh-users mailing list
+Exmh-users@redhat.com
+https://listman.redhat.com/mailman/listinfo/exmh-users

@@ -1,0 +1,39 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Wed, 15 May 2024 08:00:00 +0000
+Message-ID: <14029ffa-d0b9-4063-abb6-efa3c605577a@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+strange bedfellows senators dianne feinstein and gordon smith announce partne=
+rship in response to the western energy crisis march 15 , 2001 washington , d=
+c - senators dianne feinstein ( d - ca ) and gordon smith ( r - or ) today an=
+nounced an agreement to introduce bipartisan legislation to restore stability=
+ and reliability to the western energy market by directing the federal energy=
+ regulatory commission ( ferc ) to impose a temporary " just and reasonable "=
+ wholesale rate cap or cost - of - service based rates . the legislation will=
+ also require the states involved in this effort to pass on the cost of the e=
+lectricity to retail customers . however , the states would be able to determ=
+ine how and when this would be done . in other words , california could choos=
+e to use tiered - pricing , real - time pricing or set a baseline rate above =
+which prices would be passed through . " we now have a piece of legislation t=
+hat can fix the broken electricity market and provide a period of reliability=
+ and stability in wholesale energy costs , " senator feinstein said . " ferc =
+has found the wholesale prices being charged in california to be unjust and u=
+nreasonable . this legislation essentially will mandate that once ferc makes =
+such a finding , the agency will carry out its regulatory role . this is a $ =
+175 million a year agency . it is there to regulate the energy marketplace , =
+and it should . what the federal government can do is to provide a period of =
+reliability and stability at a time of crisis . unfortunately ferc has refuse=
+d to do so . " " california ' s broken electricity market is a result of a fl=
+awed 1996 california law that deregulated wholesale costs , but left in place=
+ caps on retail prices . this was coupled with a requirement that the utiliti=
+es divest themselves of their generating capacity and buy most of their elect=
+ricity on the spot market , where prices have escalated dramatically . in hin=
+dsight all of this came together in a catastrophic scenario , so that today ,=
+ california buys electricity at astronomical prices . we believe that ferc ne=
+eds to act to help restore reasonable costs and stability to this marketplace=
+ . "

@@ -1,0 +1,29 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Thu, 09 May 2024 15:00:00 +0000
+Message-ID: <54b907b1-960e-4f0e-9226-09b4ec26c371@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+hi i was just wondering if anyone experiening difficulty with eircom mail
+sever.I was trying to send mail from mozilla mail but it keeps coming up
+with this error:
+sorry,that domain isnt in my list of allows rcpthosts(#5.7.1)
+please check the message recipients and try again.What is this all about.
+I am using mail2.eircom.net as my smtp and my pop, i can recieve mail but
+i cannot send mail. is there any other open relay that i  can use.
+nils
+Also i was just browsing the web and came across this
+http://www.microsoft.com/ireland/security/info2.htm
+Its a seminar on
+security and reliable
+maybe ilug should go along and hold a seminar on the same day right
+across the hall from this!
+nils
+-- 
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

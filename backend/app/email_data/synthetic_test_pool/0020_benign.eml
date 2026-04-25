@@ -1,0 +1,73 @@
+From: Alice Johnson <alice.johnson@university.edu>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Tue, 17 Dec 2024 04:00:00 +0000
+Message-ID: <bfe07c52-f66a-4bf9-8892-cfbd06093b2d@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+On Sat, 3 Aug 2002, kevin lyda wrote:> sites like this make me question my op=
+position to capital
+> punishment.:)> "This month's Q&A: Is it better to prepend or append disclai=
+mer
+> statements?"  augh!  and they admit they're pointless - in reality
+> they're just the legal world's version of mandatory email fashion
+> accessories.not legal, more management/corporate fashion. cause most of the
+actual /legal/ opinion on the web i've found on the web indicates:1. they sho=
+uld be used /sparingly/blanket pre/appending of disclaimers /dilutes/ any leg=
+al
+effectiveness they have.2. they are not binding, and have little meaning othe=
+r than in=20
+certain situations.they are not binding. though there are some situations whe=
+re for proffessional reasons one
+may wish to indicate the standing of an email. (eg legal advice "this
+is / is not legal advice" type of thing. But again, this means=20
+disclaimers need to context-specific. (see 1.)3. there is precedence that bla=
+nket disclaimers, under UK law, have=20
+no standing and that rather (common sense this) it is the context of=20
+the situation that determines the legal effects of an email.See the norwich u=
+nion case. Anyway, my top tips to help superiors who've fallen for disclaimer=
+s=20
+to see sense:1. server side appends breaks email standards. (unless always do=
+ne=20
+correctly - nearly impossible, cause then server has to understand=20
+every possible type of client encoding).1a. it /does/ break certain types of =
+encryption, that depend on the=20
+body being untouched. (eg X.509? kate brought this up ages ago).1b. iirc, it =
+contravenes MIME to pre/append non mime-typed text. Most=20
+mailers will work around this and display the mail 'correctly', some=20
+might not though. Eg the message might not be displayed, or the=20
+disclaimer might not be displayed.1c. the correct place for disclaimers is on=
+ the client side. this=20
+also allows the user to select appropriate disclaimer for appropriate=20
+context (or no disclaimer at all).2. blanket appended disclaimers are of dubi=
+ous legal effectiveness.=20
+(dilution, NU case in UK)3. generic disclaimer text is of dubious legal effec=
+tiveness. indeed
+it will often be completely inappropriate ('this message is
+confidential' on list mail). see 1c. Also, it needs to be written by=20
+an actual lawyer.4. A lot of big multinational corporations do /not/ append=20
+disclaimers. (ones i know of: Compaq (deceased), Motorol (iirc),=20
+Microsoft (iirc)).Useful link:http://www.goldmark.org/jeff/stupid-disclaimers/
+(and see links at bottom of this page).finally, if you cant get reason to pre=
+vail and you have to agree to
+implementing server side disclaimers, you can still resort to:	"that'll be do=
+ne just as soon as the company stationary has
+	disclaimers printed on them. oh, and i guess we'll have to play a
+	disclaimer before or after all our telephone calls too?=20
+	Wait, that would cause a problem for faxes wouldnt it?"> kevinDisclaimer: IA=
+NAL, all the above might be wrong, i might even be=20
+intentionally misleading you. who knows.. go check it out for=20
+yourself.regards,
+--=20
+Paul Jakma	paul@clubi.ie	paul@jakma.org	Key ID: 64A2FF6A
+	warning: do not ever send email to spam@dishone.st
+Fortune:
+A real patriot is the fellow who gets a parking ticket and rejoices
+that the system works.
+--=20
+Irish Linux Users' Group Social Events: social@linux.ie
+http://www.linux.ie/mailman/listinfo/social for (un)subscription information.
+List maintainer: listmaster@linux.ie

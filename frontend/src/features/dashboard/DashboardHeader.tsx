@@ -1,11 +1,13 @@
-import { Badge, Group, Text, Title } from '@mantine/core'
+import { Badge, Button, Group, Text, Title } from '@mantine/core'
 import type { QueueItem } from './types'
 
 type DashboardHeaderProps = {
   queue: QueueItem[]
+  onProcessEmails: () => void
+  isProcessing: boolean
 }
 
-export function DashboardHeader({ queue }: DashboardHeaderProps) {
+export function DashboardHeader({ queue, onProcessEmails, isProcessing }: DashboardHeaderProps) {
   return (
     <Group justify="space-between" align="flex-end">
       <div>
@@ -21,6 +23,13 @@ export function DashboardHeader({ queue }: DashboardHeaderProps) {
         <Badge variant="light" color="red">
           {queue.filter((item) => item.ui.severity === 'critical').length} critical
         </Badge>
+        <Button
+          size="sm"
+          loading={isProcessing}
+          onClick={onProcessEmails}
+        >
+          Process Emails
+        </Button>
       </Group>
     </Group>
   )

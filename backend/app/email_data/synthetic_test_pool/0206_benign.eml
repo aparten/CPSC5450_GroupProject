@@ -1,0 +1,15 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Fri, 05 Jan 2024 02:00:00 +0000
+Message-ID: <b8147927-062b-4142-9453-a2620f96410d@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+URL: http://diveintomark.org/archives/2002/10/09.html#wedding_music
+Date: 2002-10-09T23:41:26-05:00It's confirmed: Dora and I will be walking dow=
+n the aisle to the sounds of the=20
+Triangle Tuba Quartet[1]. That is just too cool for words.[1] http://www.duke=
+.edu/~ieisen/ttq.html

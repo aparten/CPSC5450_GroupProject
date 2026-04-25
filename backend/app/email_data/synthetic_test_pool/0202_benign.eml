@@ -1,0 +1,25 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Tue, 16 Jul 2024 20:00:00 +0000
+Message-ID: <f8e115bd-ba91-4746-9976-4be15cb7c420@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+>Tracking it down showed that my
+>predecessor's "add new entries to the end of its linked list" function
+>recursively called itself with each following link until the terminating
+>one showed up. Of course it died miserably when it ran out of stack. I'm
+>sure he felt he'd done a good days work when he planted that bomb for
+>me./Enter the rant.One thing that really bugs me is when people say things l=
+ike."On the machies we have these days you don't have to worry about
+ writing optimised code" or "don't worry about writing
+ things inline, just use a function""Yeah and add a procedure prolog or eight=
+", I always counter,
+to be told
+"On the machines we have these days....."Boggle.--=20
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

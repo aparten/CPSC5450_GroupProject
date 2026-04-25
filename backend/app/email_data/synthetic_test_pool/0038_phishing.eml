@@ -1,0 +1,11 @@
+From: Microsoft Support <support@micros0ft-alerts.org>
+To: inbox@phish-trap.internal
+Subject: Your account has been compromised
+Date: Sat, 23 Nov 2024 13:00:00 +0000
+Message-ID: <556fbd1e-2a80-4b30-9ad5-d64247fd4d16@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+software megastore http : / / grimaldi . mainoemstore . com / ? a = 3107

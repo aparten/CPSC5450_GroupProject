@@ -1,0 +1,17 @@
+From: Dave Kim <dave.kim@startup.io>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Mon, 30 Dec 2024 20:00:00 +0000
+Message-ID: <57ce7e9e-fd30-4f1a-8e2a-d15c52d4f97e@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+
+In a message dated 7/23/2002 8:45:18 PM, ejw@cse.ucsc.edu writes:>Pastry is a=
+ generic, scalable and efficient substrate for peer-to-peer
+>applications. Pastry nodes form a decentralized, self-organizing and
+>fault-tolerant overlay network within the Internet. Is it made with lard, bu=
+tter, or vegetable shortenings?=20
+http://xent.com/mailman/listinfo/fork

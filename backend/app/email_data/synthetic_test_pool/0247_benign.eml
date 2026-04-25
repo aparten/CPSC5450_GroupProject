@@ -1,0 +1,42 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: security-team@soc.internal
+Subject: Project update for Q247
+Date: Thu, 22 Aug 2024 10:00:00 +0000
+Message-ID: <e5b9d343-04e6-429e-ad0d-5766647e49da@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+A while ago I asked what other packages I should optomize for Pentium. One=20
+person answered GlibC. This got me thinking about GCC itself, so I asked on=20
+another list and got a few answers, most were "don't even think about it" but=
+=20
+a few suggested GCC and one pointed me to Linux From Scratch.After having a g=
+ood search around the lfs site, I've decided I'm going to=20
+give it a whirl. I've got a spare box and loads of free time, so why not ;-)T=
+he lfs site, however warns NOT to use optimizations when compiling GCC or=20
+GlibC? A quick google found PGCC, a Pentium optimizing patch for GCC, but the=
+=20
+site does not seem to have been updated in quite some time?So, my general pla=
+n, and I'm taking my time with this:Partition the hard drive for the lfs set-=
+up with 4 partitions, /, /usr, /var=20
+and /home.
+Install a base Debian system into the /home  partition so I can build the=20
+rest of the system into the other partitions.
+Using Debian, build the initial packages into the / and /usr partitions. I'll=
+=20
+try to optimize GCC and GlibC in this first stage.
+chroot to the / partition and re-build the base packages for shared libs.
+strip de-bugging from the binaries and change the boot so the system boot=20
+from / rather than /home, then move /home to it's proper partition.All going =
+well, I should now have a full base Linux system running that is=20
+fully optimized for my PentiumMMX including GCC and GlibC.Now I can build zli=
+b and then X, again optimizing. And I can follow this with=20
+the various graphics libs, qt lib and finally KDE.If all goes well, I will pr=
+obably repeate this for my Dual system, once I can=20
+find a match for the slot1 550Mhz PIII Iv'e got.I might even be tempted to wr=
+ite this up for the site.Cheers,	John Gay--=20
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

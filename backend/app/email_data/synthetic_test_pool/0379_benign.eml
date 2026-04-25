@@ -1,0 +1,35 @@
+From: Eve Nguyen <eve.nguyen@consulting.co>
+To: security-team@soc.internal
+Subject: Project update for Q379
+Date: Tue, 16 Jan 2024 06:00:00 +0000
+Message-ID: <130eed41-c7f6-47f6-b268-c994803d30a5@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+I just installed razor 2.152 on a FreeBSD 4.4-RELEASE box and having
+problems with razor-check.  Any time razor-check is run, (with or without
+arguments), i get this error:Can't use an undefined value as a symbol referen=
+ce at
+/usr/local/lib/perl5/site_perl/5.005/i386-freebsd/Razor2/Client/Agent.pm
+line 756.razor-admin runs just fine and the make test before the install was =
+all
+ok.Has anyone seen this before?Module versions:
+Digest-HMAC-1.01
+Digest-MD5-2.20
+Digest-Nilsimsa-0.06
+Digest-SHA1-2.01
+MIME-Base64-2.12
+Net-DNS-0.23
+Test-Simple-0.44
+Time-HiRes-01.20
+URI-1.19
+-------------------------------------------------------
+This sf.net email is sponsored by:ThinkGeek
+Welcome to geek heaven.
+http://thinkgeek.com/sf
+_______________________________________________
+Razor-users mailing list
+Razor-users@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/razor-users

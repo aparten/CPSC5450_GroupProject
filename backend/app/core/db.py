@@ -5,7 +5,12 @@ from sqlmodel import SQLModel, Session, create_engine
 from app.core.config import settings
 
 
-engine = create_engine(str(settings.POSTGRES_DSN), pool_pre_ping=True)
+engine = create_engine(
+    str(settings.POSTGRES_DSN),
+    pool_pre_ping=True,
+    pool_size=20,
+    max_overflow=10,
+)
 
 
 def init_db() -> None:

@@ -19,18 +19,10 @@ def list_inbox_eml() -> list[str]:
     return sorted([p.name for p in INBOX_DIR.glob("*.eml") if p.is_file()])
 
 def claim_inbox_file(filename: str, event_id: str) -> Path:
-    """
-    Move inbox/{filename} -> processing/{event_id}__{filename}
-    This acts as a lock/claim.
-    """
     ensure_dirs()
     src = INBOX_DIR / filename
-    if not src.exists():
-        raise FileNotFoundError(f"Inbox file not found: {filename}")
-
     dst = PROCESSING_DIR / f"{event_id}__{filename}"
-    # Move within same volume should be atomic-ish
-    src.replace(dst)
+    src.replace(dst)  # raises FileNotFoundError if already claimed or deleted
     return dst
 
 def read_processing_eml(processing_path: Path) -> bytes:
@@ -49,8 +41,31 @@ def write_parsed_json(event_id: str, payload: dict) -> Path:
     out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return out
 
+def move_claimed_to_errors(processing_path: Path) -> Path:
+    """Move a claimed file to the errors dir when pipeline setup fails."""
+    ensure_dirs()
+    dst = ERRORS_DIR / processing_path.name
+    processing_path.replace(dst)
+    return dst
+
 def write_error(event_id: str, message: str) -> Path:
     ensure_dirs()
     out = ERRORS_DIR / f"{event_id}.txt"
     out.write_text(message, encoding="utf-8")
     return out
+
+def purge_operational_dirs() -> dict[str, int]:
+    """Delete all files from operational directories, leaving synthetic_test_pool intact."""
+    counts: dict[str, int] = {}
+    for directory in [INBOX_DIR, PROCESSING_DIR, DONE_DIR, PARSED_DIR, ERRORS_DIR]:
+        deleted = 0
+        if directory.exists():
+            for item in directory.iterdir():
+                if item.is_file():
+                    item.unlink()
+                    deleted += 1
+                elif item.is_dir():
+                    shutil.rmtree(item)
+                    deleted += 1
+        counts[directory.name] = deleted
+    return counts

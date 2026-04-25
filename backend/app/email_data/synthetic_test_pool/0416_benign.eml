@@ -1,0 +1,14 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Thu, 09 May 2024 00:00:00 +0000
+Message-ID: <2ae62aa9-c21f-4cb6-a7f7-201f39cbef09@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+start date : 12 / 22 / 01 ; hourahead hour : 17 ; start date : 12 / 22 / 01 ;=
+ hourahead hour : 17 ; no ancillary schedules awarded . no variances detected=
+ . log messages : parsing file - - > > o : \ portland \ westdesk \ california=
+ scheduling \ iso final schedules \ 2001122217 . txt

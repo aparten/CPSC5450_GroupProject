@@ -1,0 +1,11 @@
+From: HR Department <hr-team@company-benefits-portal.com>
+To: inbox@phish-trap.internal
+Subject: Your account has been compromised
+Date: Wed, 04 Sep 2024 16:00:00 +0000
+Message-ID: <947a389e-71db-4e74-ba1f-c66f0dff22a7@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+empty

@@ -1,59 +1,67 @@
-# app/tasks/email_tasks.py
 from __future__ import annotations
 
+import logging
+import time
+from pathlib import Path
 from uuid import UUID
+
 from sqlmodel import Session
 
-from app.tasks.worker import app
-from app.core.db import engine
 from app import crud
+from app.core.db import engine
 from app.models.email import EmailStatus
-from pathlib import Path
-
-from app.services.triage import TriageEngine
-from app.services.email_processing import parse_and_validate
 from app.services.email_filesystem import (
-    read_processing_eml,
-    write_parsed_json,
-    write_error,
     archive_raw_success,
+    read_processing_eml,
+    write_error,
+    write_parsed_json,
 )
-from app.services.job_status import set_status  # if you're still using this
+from app.services.email_processing import parse_and_validate
+from app.services.triage import TriageEngine
+from app.tasks.worker import app
+
+logger = logging.getLogger(__name__)
 
 triage_engine = TriageEngine()
+
 
 @app.task(bind=True, name="app.tasks.email_tasks.parse_inbox_email")
 def parse_inbox_email(self, event_id: str, processing_path: str) -> dict:
     event_uuid = UUID(event_id)
-
-    # optional: status tracking
-    set_status(event_id, "processing", {"processing_path": processing_path})
 
     with Session(engine) as session:
         try:
             crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.processing)
 
             eml_bytes = read_processing_eml(Path(processing_path))
+
+            t0 = time.perf_counter()
             payload = parse_and_validate(eml_bytes, email_id=event_id)
+            t1 = time.perf_counter()
 
             verdict = triage_engine.triage(payload)
             payload |= verdict
+            t2 = time.perf_counter()
 
-            # 1) Write parsed JSON to filesystem (you already have this working)
             out_path = write_parsed_json(event_id, payload)
-
-            # 2) Write parsed result to DB (THIS is what you want)
             crud.upsert_email_parsed(session, event_id=event_uuid, payload=payload)
+            t3 = time.perf_counter()
 
-            # 3) Mark done, archive raw
             archive_raw_success(Path(processing_path))
             crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.done)
 
-            set_status(event_id, "done", {"parsed_path": str(out_path)})
+            logger.info(
+                "email %s: parse=%.0fms triage=%.0fms db=%.0fms total=%.0fms",
+                event_id,
+                (t1 - t0) * 1000,
+                (t2 - t1) * 1000,
+                (t3 - t2) * 1000,
+                (t3 - t0) * 1000,
+            )
+
             return {"event_id": event_id, "parsed_path": str(out_path)}
 
         except Exception as e:
             write_error(event_id, f"Unhandled error: {e}")
             crud.set_email_event_status(session, event_id=event_uuid, status=EmailStatus.failed, error=str(e))
-            set_status(event_id, "failed", {"error": str(e)})
             raise

@@ -1,0 +1,13 @@
+From: Account Security <security-noreply@acc0unt-verify.com>
+To: inbox@phish-trap.internal
+Subject: Your account has been compromised
+Date: Wed, 17 Jul 2024 19:00:00 +0000
+Message-ID: <19c6e3ec-8fe4-4fef-af08-a19e1cc65d2f@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+coke * or pepsi * - which is your favorite cola ? we ' ll give you $ 100 wort=
+h of soda or a $ 100 restaurant gift card for choosing between coke =C2=AE * =
+or pepsi =C2=AE * for our survey . cglfbydh

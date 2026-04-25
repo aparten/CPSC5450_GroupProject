@@ -1,0 +1,83 @@
+From: Alice Johnson <alice.johnson@university.edu>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Wed, 31 Jul 2024 09:00:00 +0000
+Message-ID: <d7b592f6-aa22-49dd-9d12-b1b499f4287f@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+resource logics and minimalist grammars esslli ` 99 workshop on resource logi=
+cs and minimalist grammars ( deadline for submissions : march 15th 1999 ) utr=
+echt , 16-20 august 1999 organizers : christian retor ( irisa , rennes ) edwa=
+rd stabler ( ucla , los angeles ) url : http : / / www . irisa . fr / rlmg e =
+- mail : rlmg @ irisa . fr a workshop held as part of the 11th european summe=
+r school in logic , language and information ( esslli ` 99 ) , august 9-20 19=
+99 , utrecht first call for papers esslli ` 99 : the main focus of the europe=
+an summer schools in logic , language and information is the interface betwee=
+n linguistics , logic and computation . it is organized under the auspices of=
+ the european association for logic , language and information ( folli ) . fo=
+undational , introductory and advanced courses together with workshops cover =
+a wide variety of topics within six areas of interest : logic , computation ,=
+ language , logic and computation , computation and language , language and l=
+ogic . previous summer schools have been highly successful , attracting aroun=
+d 500 students from europe and elsewhere . the school has developed into an i=
+mportant meeting place and forum for discussion for students and researchers =
+interested in the interdisciplinary study of logic , language and information=
+ . esslli-99 will take place at the university of utrecht , the netherlands ,=
+ august 9-20 . in its second week it will feature a worskshop on resource log=
+ics and minimalist grammars . its aim is to provide a forum for advanced ph .=
+ d . students and other researchers to present and discuss their work on the =
+connection between minimalist grammars and resource logics . workshop backgro=
+und : there has been a growing interest in connections between resource-logic=
+al theories of grammar and the minimalist grammars of the transformational tr=
+adition in syntax . a good understanding of these connections will reveal sub=
+stantial differences that can be debated , and the prospects also look good f=
+or identifying a valuable common ground . in particular , the rich descriptiv=
+e tradition of transformational theory may become more accessible to resource=
+-logical frameworks , and the relatively well-understood mathematical foundat=
+ions of resource-logical frameworks may stimulate a more sophisticated unders=
+tanding of the mechanisms of minimalist grammars . linear logic is a neat and=
+ well studied logic from a proof theoretical perspective which is able to han=
+dle both logic for syntax ( like the lambek calculus ) and logic for semantic=
+s ( like intuitionistic logic ) , and it also appears to be a sensible framew=
+ork for a logical treatment of minimalist grammars . this workshop aims to br=
+ing together phd students and other researchers in the respective traditions =
+to explore these developments . topics of interest include but are not limite=
+d to : * applications of linear logic , multimodal categorial logic , and oth=
+er resource logics to linguistic problems * formal and computational studies =
+of minimalist and other generative grammars * studies of linguistic semantics=
+ from the perspective of either tradition * assessments of the common ground =
+and differences among these approaches to language workshop aims : this works=
+hop aims to : * provide a setting for researchers from various traditions to =
+present and discuss recent work on resource logics and minimalist grammars * =
+facilitate the exchange of ideas between researchers working in these respect=
+ive areas * foster a spirit of collaborative research call for papers : resea=
+rchers in the area , including phd students and young researchers , are invit=
+ed to submit short papers ( between 8 and 12 pages long ) describing their th=
+esis / research topic , approach and results . talks will be 20 minutes long =
+, with 10 minutes for discussion / questions . authors are also encouraged to=
+ submit a list of topics they would like to see discussed at the workshop . t=
+his will help to identify issues for discussion and debate . deadline for sub=
+missions : march 15 , 1999 submissions should be sent to : rlmg @ irisa . fr =
+submissions will be accepted in the form of either postscript or self-contain=
+ed latex . authors of accepted papers will be notified by may 1st 1998 . the =
+deadline for receipt of revised papers to appear in the workshop proceedings =
+is june 1st 1998 . workshop format : the workshop will consist of five sessio=
+ns of 90 minutes each held over five days . there will be either two or three=
+ presentations at each session with time for questions and discussion . it is=
+ hoped to have at least one invited paper from a senior researcher working in=
+ the field . publication : after the workshop , authors will have the opportu=
+nity to submit papers for possible publication in the new electronic journal =
+" language and computation " ( http : / / www . dcs . kcl . ac . uk / journal=
+s / jlac / ) , which is supported by oxford university press . there will be =
+more details in the next announcement . registration : workshop contributors =
+will be required to register for esslli-99 . important dates : march 15th , 9=
+9 : deadline for submissions may 1st , 99 : notification of acceptance june 1=
+st , 99 : deadline for final copy august 16th , 99 : start of workshop furthe=
+r information : to obtain further information about esslli-99 please visit th=
+e esslli-99 home page at http : / / esslli . let . uu . nl or send an email t=
+o esslli99 @ let . uu . nl . for further information on the workshop visit th=
+e site of the workshop http : / / www . irisa . fr / rlmg or send an email to=
+ rlmg @ irisa . fr

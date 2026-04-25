@@ -1,0 +1,33 @@
+From: Microsoft Support <support@micros0ft-alerts.org>
+To: inbox@phish-trap.internal
+Subject: Suspicious login detected on your account
+Date: Tue, 16 Jan 2024 20:00:00 +0000
+Message-ID: <12de7a3c-0ed6-4b8c-b1ac-555deba7b9e3@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+mail delivery failed : returning message to sender this message was created a=
+utomatically by mail delivery software . a message that you sent could not be=
+ delivered to one or more of its recipients . this is a permanent error . the=
+ following address ( es ) failed : steve . carpenter @ up 4 it . demon . co .=
+ uk ( generated from steve . carpenter @ up 4 it . info ) smtp error from rem=
+ote mailer after end of data : host punt - 1 . mail . demon . net [ 194 . 217=
+ . 242 . 248 ] : 550 blocked by recipient ' s spam filter options . if messag=
+e is legitimate , please forward a copy to rbl @ demon . net for investigatio=
+n . - - - - - - this is a copy of the message , including all the headers . -=
+ - - - - - return - path : received : from [ 222 . 47 . 74 . 64 ] ( helo =3D =
+mailwisconsin . com ) by seven . mx . 123 - reg . co . uk with smtp ( exim 4 =
+. 43 ) id ldupqo - 0001 fc - bw for steve . carpenter @ up 4 it . info ; tue =
+, 19 jul 2005 12 : 00 : 39 + 0100 received : from 205 . 214 . 42 . 66 ( squir=
+relmail authenticated user projecthoneypot @ projecthoneypot . org ) ; by mai=
+lwisconsin . com with http id j 87 gzo 09360701 ; tue , 19 jul 2005 10 : 57 :=
+ 46 + 0000 message - id : date : tue , 19 jul 2005 10 : 57 : 46 + 0000 subjec=
+t : just to her . . . from : " barry castillo " to : steve . carpenter @ up 4=
+ it . info user - agent : squirrelmail / 1 . 4 . 3 a x - mailer : squirrelmai=
+l / 1 . 4 . 3 a mime - version : 1 . 0 content - type : text / html ; charset=
+ =3D iso - 8859 - 1 content - transfer - encoding : 8 bit x - priority : 3 ( =
+normal ) importance : normal soft viagra at $ 1 . 62 per dose ready to boost =
+your sex life ? positive ? time to do it right now ! order soft viagra at inc=
+redibly low prices starting at $ 1 . 99 per dose ! unbelivabie !

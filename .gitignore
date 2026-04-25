@@ -191,6 +191,9 @@ cython_debug/
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 
+# Claude Code
+.claude/
+
 # Ruff stuff:
 .ruff_cache/
 
@@ -210,4 +213,9 @@ marimo/_lsp/
 __marimo__/
 backend/app/__pycache__
 .vscode/settings.json
-backend/app/email_data
+backend/app/email_data/ingest_input/
+backend/app/email_data/processing/
+backend/app/email_data/done/
+backend/app/email_data/errors/
+backend/app/email_data/raw/
+backend/app/email_data/parsed/

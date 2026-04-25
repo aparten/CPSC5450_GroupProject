@@ -1,0 +1,18 @@
+From: Dave Kim <dave.kim@startup.io>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Fri, 05 Apr 2024 04:00:00 +0000
+Message-ID: <bce5de3b-8538-4ab9-85aa-b1467a07fd9b@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+start date : 1 / 8 / 02 ; hourahead hour : 15 ; start date : 1 / 8 / 02 ; hou=
+rahead hour : 15 ; no ancillary schedules awarded . variances detected . vari=
+ances detected in load schedule . log messages : parsing file - - > > o : \ p=
+ortland \ westdesk \ california scheduling \ iso final schedules \ 2002010815=
+ . txt - - - - load schedule - - - - $ $ $ variance found in table tblloads .=
+ details : ( hour : 15 / preferred : 20 . 53 / final : 20 . 50 ) trans _ type=
+ : final load _ id : pge 4 mkt _ type : 2 trans _ date : 1 / 8 / 02 sc _ id :=
+ enrj

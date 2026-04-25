@@ -2,7 +2,9 @@ import {
   Badge,
   Button,
   Card,
+  Center,
   Group,
+  Loader,
   Paper,
   ScrollArea,
   SegmentedControl,
@@ -23,6 +25,7 @@ type QueuePanelProps = {
   selectedId: string
   onSelect: (id: string) => void
   onResetFilters: () => void
+  isProcessing: boolean
 }
 
 export function QueuePanel({
@@ -34,6 +37,7 @@ export function QueuePanel({
   selectedId,
   onSelect,
   onResetFilters,
+  isProcessing,
 }: QueuePanelProps) {
   return (
     <Paper withBorder radius="md" p="md">
@@ -125,7 +129,15 @@ export function QueuePanel({
                 </Group>
               </Card>
             ))}
-            {queue.length === 0 && (
+            {isProcessing && (
+              <Center py="sm">
+                <Group gap="xs">
+                  <Loader size="sm" />
+                  <Text size="sm" c="dimmed">Processing emails…</Text>
+                </Group>
+              </Center>
+            )}
+            {queue.length === 0 && !isProcessing && (
               <Paper withBorder radius="md" p="xl">
                 <Stack align="center" gap={8}>
                   <Text fw={600}>No matching cases</Text>

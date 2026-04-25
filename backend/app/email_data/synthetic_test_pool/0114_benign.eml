@@ -1,0 +1,34 @@
+From: Eve Nguyen <eve.nguyen@consulting.co>
+To: analyst@soc.internal
+Subject: Re: Meeting notes from Tuesday
+Date: Fri, 03 May 2024 18:00:00 +0000
+Message-ID: <738e851b-a08d-4531-b86a-d5fb86f18c62@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+> Is it possible to use new apt to do (null) to RH8 upgrade?It might be, don'=
+t think anyone tried it yet.> Even if it's possible, are there good reasons w=
+hy maybe I should not do it and
+> just use the RH iso's (I don't think RH8 will upgrade from (null), maybe up=
+2date
+> will)?Yes ;)first off, redhat does not support upgrading from beta's to the=
+ released=20
+version.  That doesn't mean it can't work, it means nobody tried it, they=20
+sure didn't test it or fix anything to make it work, and you're on your=20
+own.second, historically a new .0 numbers mostly means "so much has been=20
+changed that you might have problems upgrading from any previous release=20
+anyway".  So, historically, most users installing a .0 release do this=20
+from scratch anyway, doing upgrades throughout x.0->x.y.If you want to avoid =
+problems, bite the bullet and reinstall ;)Thomas -- The Dave/Dina Project : f=
+uture TV today ! - http://davedina.apestaart.org/
+<-*-                      -*->
+And every time she sneezes
+I think it's love and oh lord
+I'm not ready for this sort of thing
+<-*- thomas@apestaart.org -*->
+URGent, the best radio on the Internet - 24/7 ! - http://urgent.rug.ac.be/
+_______________________________________________
+RPM-List mailing list=20
+http://lists.freshrpms.net/mailman/listinfo/rpm-list

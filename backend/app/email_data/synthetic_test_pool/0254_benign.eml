@@ -1,0 +1,75 @@
+From: Eve Nguyen <eve.nguyen@consulting.co>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Wed, 10 Jul 2024 16:00:00 +0000
+Message-ID: <f83b61f3-ed03-49c1-ab0d-9314e996080b@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+language resources and evaluation =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D=
+ =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D call for paper adapting lexical and corpus re=
+sources to sublanguages and applications granada may 26 , 1998 this workshop =
+will be held in conjunction with the first international conference on langua=
+ge resources and evaluation ( lrec ) , to be held in granada , spain on may 2=
+8 - 30 , 1998 . the workshop will provide a forum for those researchers invol=
+ved in the development of methods to integrate corpora and mrds , with the ai=
+m of adding adaptive capabilities to existing linguistic resources . workshop=
+ scope and aims lexicons , i . e . , those components of a nlp system that co=
+ntain " computable " information about words , cannot be considered as static=
+ objects . words may behave very differently in different domains , and there=
+ are language phenomena that do not generalize across sublanguages . lexicons=
+ are a snapshot of a given stage of development of a language , normally prov=
+idedwithout support for adaptation changes , whether caused by language creat=
+ivity and development or the shift to such a previously unencountered domain =
+. the divergence of corpus usage 's from lexical norms has been studied compu=
+tationally at least since the late sixties , but only recently has the availa=
+bility of large on-line corpora made it possible to establish methods to cope=
+ systematically with this problem . an emerging branch of research is now inv=
+olved in studies and experiments on corpus-driven linguistics , with the aim =
+of complementing and extending earlier work on lexicon acquisition based on m=
+achine readable dictionaries ( mrd ) : data are extracted from texts , as emb=
+odiments of language in use , so as to capture lexical regularities and to co=
+de them into operational forms . the purpose of this workshop will be to prov=
+ide an updated snapshot of current work in the area , and promote discussion =
+of how to make progress . central topics will be ( though this list is in no =
+way exclusive ) : * corpus-driven tuning of mrds to optimize domain-specific =
+inferences , * terminology and jargon acquisition , * sense extensions , * ac=
+quisition of preference or subcategorization information from corpora * taxon=
+omy adaptation , * staistical weighting of senses etc . to domains * use of m=
+rds to provide explanations of linguistic phenomena in corpora * what is the =
+scope of " lexical tuning " * the evaluation of lexical tuning as a separate =
+task , or as part of a more generic task organizers : roberto basili ( univer=
+sity of roma " tor vergata " ) , roberta catizone ( university of sheffield )=
+ , maria teresa pazienza ( university of roma " tor vergata " ) , paola velar=
+di ( university of roma " la sapienza ) , yorick wilks ( university of sheffi=
+eld ) preliminary program committee yorick wilks university of sheffield robe=
+rta catizone university of sheffield paola velardi university of roma " la sa=
+pienza " maria teresa pazienza university of roma " tor vergata " roberto bas=
+ili university of roma " tor vergata " bran boguraev brandeis university serg=
+ei nirenburg new mexico state university james pustejowsky brandeis universit=
+y ralph grishman new york university christiane fellbaum princeton university=
+ paper submission formatting guidelines : papers should not exceed 4000 words=
+ or 10 pages . hard copies : three hard copies should be sent to : paola vela=
+rdi dipartimento di scienza dell ' informazione via salaria 113 00198 roma it=
+aly electronic submission : electronic submission will be allowed in poscript=
+ or word per mac or rtf . an ftp site will be available on demand . authors s=
+hould send an info email to paola velardi ( velardi @ dsi . uniroma1 . it ) e=
+ven if they submit in paper form . an electronic submission should be accompa=
+nied by a plain ascii text . # name : name of first author # title : title of=
+ the paper # pages : number of pages # files : name of file ( if also submitt=
+ed electronically ) # note : anything you 'd like to add # keys : keywords # =
+email : email of the first author # abstr : abstract of the paper important d=
+ates paper submission deadline ( hard copy / electronic ) february 20 paper n=
+otification march 20 camera - ready papers due april 15 l&ct workshop may 26 =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D prof =
+. paola velardi dipartimento di scienza dell ' informazione via salaria 113 u=
+niversita ' " la sapienza " 00198 roma ph . + 39 - ( 0 ) 6-49918356 fax + 39 =
+- ( 0 ) 6-8541842 8841964

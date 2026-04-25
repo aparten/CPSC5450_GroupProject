@@ -1,0 +1,30 @@
+From: Dave Kim <dave.kim@startup.io>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Thu, 02 May 2024 06:00:00 +0000
+Message-ID: <1f512cdf-7f3d-428d-98e6-8a56d7985641@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+schedule crawler : hourahead failure start date : 1 / 16 / 02 ; hourahead hou=
+r : 13 ; hourahead schedule download failed . manual intervention required . =
+log messages : parsing file - - > > o : \ portland \ westdesk \ california sc=
+heduling \ iso final schedules \ 2002011613 . txt error : dbcaps 97 data : ca=
+nnot perform this operation on a closed database ! ! ! unknown database . ali=
+as : dbcaps 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unk=
+nown database . alias : dbcaps 97 data error : dbcaps 97 data : cannot perfor=
+m this operation on a closed database ! ! ! unknown database . alias : dbcaps=
+ 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unknown databa=
+se . alias : dbcaps 97 data error : dbcaps 97 data : cannot perform this oper=
+ation on a closed database ! ! ! unknown database . alias : dbcaps 97 data ! =
+! ! unknown database . alias : dbcaps 97 data error : dbcaps 97 data : cannot=
+ perform this operation on a closed database error : dbcaps 97 data : cannot =
+perform this operation on a closed database error : dbcaps 97 data : cannot p=
+erform this operation on a closed database ! ! ! unknown database . alias : d=
+bcaps 97 data ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unknown d=
+atabase . alias : dbcaps 97 data ! ! ! unknown database . alias : dbcaps 97 d=
+ata ! ! ! unknown database . alias : dbcaps 97 data ! ! ! unknown database . =
+alias : dbcaps 97 data ! ! ! unknown database . alias : dbcaps 97 data error =
+: dbcaps 97 data : cannot perform this operation on a closed database

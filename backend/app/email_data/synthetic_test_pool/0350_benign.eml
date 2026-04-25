@@ -1,0 +1,14 @@
+From: Alice Johnson <alice.johnson@university.edu>
+To: inbox@phish-trap.internal
+Subject: Lunch plans for Friday?
+Date: Thu, 04 Jul 2024 05:00:00 +0000
+Message-ID: <a5f68f2c-2462-4d4a-ae91-0b61b9ee95df@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+aep transition items attached is a brief memo outline some of the transtion i=
+ssues with hpl to aep this is the first draft . the itilized items currently =
+require some more action . please add any items and forward back to me . i wi=
+ll update thanks bob

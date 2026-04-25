@@ -1,0 +1,12 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Sun, 14 Jul 2024 15:00:00 +0000
+Message-ID: <99736b32-145b-4f65-93b9-37f6349234d0@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+URL: http://www.newsisfree.com/click/-5,8305902,1717/
+Date: 2002-09-27T09:52:31+01:00(Stuff.co.nz)

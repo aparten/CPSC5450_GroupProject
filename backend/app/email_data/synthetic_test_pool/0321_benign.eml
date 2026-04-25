@@ -1,0 +1,31 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: analyst@soc.internal
+Subject: Reminder: Team standup at 10am
+Date: Tue, 21 May 2024 12:00:00 +0000
+Message-ID: <82973f99-1481-40cc-9b9a-467dd4c3b7a2@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Yes - great minds think alike. But even withput eval rules it would be very=20
+useful. It would allow us to respond quickly to spammer's tricks.Theo Van Din=
+ter wrote:
+> On Thu, Aug 22, 2002 at 07:27:52AM -0700, Marc Perkel wrote:
+>=20
+>>Has anyone though of the idea of live updates of rules after release? The=20
+>>idea being that the user can run a cron job once a week or so and get the=20
+>>new default rule set. This would allow us to react faster to:
+>=20
+>=20
+> I suggested this a few months ago.  I don't remember the details of what
+> came out of it except that it would only be useful for non-eval rules
+> since those require code changes.
+> -------------------------------------------------------
+This sf.net email is sponsored by: OSDN - Tired of that same old
+cell phone?  Get a new here for FREE!
+https://www.inphonic.com/r.asp?r=3Dsourceforge1&refcode1=3Dvs3390
+_______________________________________________
+Spamassassin-devel mailing list
+Spamassassin-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/spamassassin-devel

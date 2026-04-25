@@ -1,0 +1,13 @@
+From: HR Department <hr-team@company-benefits-portal.com>
+To: inbox@phish-trap.internal
+Subject: Your account has been compromised
+Date: Thu, 11 Jul 2024 12:00:00 +0000
+Message-ID: <e8759ec8-2976-4b1f-b12e-cb217144469d@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+delivery status notification ( failure ) this is an automatically generated d=
+elivery status notification . delivery to the following recipients failed . n=
+oumanb @ multinet . com . pk

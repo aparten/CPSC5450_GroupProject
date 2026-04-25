@@ -1,0 +1,29 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Sat, 28 Sep 2024 09:00:00 +0000
+Message-ID: <ea8015a7-f9de-47c6-bb9e-d16baa74d70e@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+On Sat, Jul 20, 2002 at 10:47:36AM +0100, Stephen Shirley wrote:
+...
+> 	It's very easy to get one program to act on the output of a second
+> program: cmd1 | cmd2. But, what if you want cmd1 to act on the output of
+> cmd2 as well? Hmm. Eventually, I came up with this solution:
+>=20
+> 	mkfifo io
+> 	cmd1  io
+...
+> mine, and i is happy person once again. In case you were wondering, the
+> aim of all of this was to write a shell script that could check for new
+> mail on an imap server.Doesn't answer your question, but perhaps a combinat=
+ion of expect and
+(netcat or telnet) might have made for an easier solution?Later
+Kenn
+--=20
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

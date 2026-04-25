@@ -1,30 +1,30 @@
-from pydantic import BaseModel
-from email.message import EmailMessage
 from typing import Annotated
-from app.models.email import EmailEvent, EmailParsed, EmailResolution, EmailAction, EmailResolutionBase
-from pathlib import Path
-
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query
-from jsonschema import ValidationError
 import uuid
 
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
+from jsonschema import ValidationError
+from pydantic import BaseModel
+from sqlmodel import Session, delete, select
+
 from app import crud
-from app.services.email_storage import save_raw_eml
-from app.services.email_processing import parse_and_validate
-
-from fastapi import APIRouter, Depends
-from sqlmodel import Session, select, Sequence
-
-from app.core.db import get_db
-from app.crud import create_email_event
-from app.services.email_filesystem import list_inbox_eml, claim_inbox_file
-from app.tasks.worker import app as celery_app
 from app.api.deps import CurrentUser
+from app.core.db import get_db
+from app.models.email import EmailEvent, EmailAction, EmailParsed, EmailResolution, EmailResolutionBase
+from app.services.email_filesystem import (
+    INBOX_DIR,
+    claim_inbox_file,
+    list_inbox_eml,
+    move_claimed_to_errors,
+    purge_operational_dirs,
+)
+from app.services.email_processing import parse_and_validate
+from app.services.email_storage import save_raw_eml
+from app.tasks.worker import app as celery_app
 
 router = APIRouter(prefix="/email", tags=["email"])
 
-RAW_DIR = Path("/app/email_data/raw")
-INBOX_DIR = Path("/app/email_data/ingest_input")
+MAX_INBOX_BATCH = 100
+
 
 def _validate_upload(file: UploadFile, eml_bytes: bytes) -> None:
     if not file.filename or not isinstance(file.filename, str):
@@ -33,6 +33,7 @@ def _validate_upload(file: UploadFile, eml_bytes: bytes) -> None:
         raise HTTPException(400, "Please upload a .eml file")
     if not eml_bytes:
         raise HTTPException(400, "Uploaded file was empty")
+
 
 @router.post("/ingest")
 async def ingest_email(file: UploadFile = File(...)):
@@ -46,60 +47,84 @@ async def ingest_email(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(500, f"Failed to write raw email file: {e}")
 
-    # NEXT (later): insert row into email_events with status='queued'
-    # NEXT (later): celery task .delay(event_id)
-
     return {
         "event_id": event_id,
         "raw_path": str(raw_path),
         "status": "queued"
     }
 
+
 @router.post("/ingest/inbox")
 def ingest_inbox(db: Session = Depends(get_db)):
-    filenames = list_inbox_eml()
-    queued = []
+    total_queued = []
+    total_failed = []
 
-    for filename in filenames:
-        event_id = uuid.uuid4()
+    while True:
+        filenames = list_inbox_eml()[:MAX_INBOX_BATCH]
+        if not filenames:
+            break
 
-        # Move file to processing and get the actual path the worker should read
-        processing_path = claim_inbox_file(filename, str(event_id))
+        for filename in filenames:
+            event_id = uuid.uuid4()
+            processing_path = None
+            event_created = False
 
-        # Record event immediately (queued)
-        crud.create_email_event(
-            db,
-            event_id=event_id,
-            source_filename=filename,
-            raw_path=str(processing_path),
-        )
+            try:
+                processing_path = claim_inbox_file(filename, str(event_id))
 
-        # Enqueue task with the REAL file location
-        celery_app.send_task("app.tasks.email_tasks.parse_inbox_email", args=[
-            str(event_id),
-            str(processing_path),
-        ])
+                crud.create_email_event(
+                    db,
+                    event_id=event_id,
+                    source_filename=filename,
+                    raw_path=str(processing_path),
+                )
+                event_created = True
 
-        queued.append({"event_id": str(event_id), "filename": filename})
+                celery_app.send_task("app.tasks.email_tasks.parse_inbox_email", args=[
+                    str(event_id),
+                    str(processing_path),
+                ])
 
-    return {"queued_count": len(queued), "queued": queued}
+                total_queued.append({"event_id": str(event_id), "filename": filename})
 
-# Endpoint to add an email to INBOX_DIR
+            except Exception as e:
+                if processing_path and processing_path.exists():
+                    try:
+                        move_claimed_to_errors(processing_path)
+                    except Exception:
+                        pass
+
+                if event_created:
+                    try:
+                        db.exec(delete(EmailEvent).where(EmailEvent.event_id == event_id))
+                        db.commit()
+                    except Exception:
+                        pass
+
+                total_failed.append({"filename": filename, "error": str(e)})
+
+    return {
+        "queued_count": len(total_queued),
+        "failed_count": len(total_failed),
+        "queued": total_queued,
+        "failed": total_failed,
+    }
+
+
 @router.post("/add_email")
 def add_email(file: UploadFile = File(...)):
     eml_bytes = file.file.read()
     _validate_upload(file, eml_bytes)
 
-    filename = f"{file.filename}.eml"
-    file_path = INBOX_DIR / filename
+    file_path = INBOX_DIR / file.filename
 
     try:
-        with open(file_path, "wb") as f:
-            f.write(eml_bytes)
+        file_path.write_bytes(eml_bytes)
     except Exception as e:
         raise HTTPException(500, f"Failed to save email to inbox: {e}")
 
     return {"status": "success", "file_path": str(file_path)}
+
 
 @router.get('/messages')
 async def list_messages(
@@ -108,8 +133,8 @@ async def list_messages(
         limit: Annotated[int, Query(le=100)] = 100,
         db: Session = Depends(get_db),
 ) -> list[EmailEvent]:
-    events = db.exec(select(EmailEvent)).all()
-    return events
+    return db.exec(select(EmailEvent).offset(start).limit(limit)).all()
+
 
 @router.get('/message/{message_id}')
 async def get_message(
@@ -120,7 +145,8 @@ async def get_message(
     event = db.get(EmailEvent, message_id)
     message = db.get(EmailParsed, message_id)
     resolution = db.get(EmailResolution, message_id)
-    return { "event": event, "message": message, "resultions": resolution }
+    return {"event": event, "message": message, "resolution": resolution}
+
 
 @router.post('/message/{message_id}/resolve')
 async def resolve_email(
@@ -136,9 +162,28 @@ async def resolve_email(
     )
     db.add(resolution)
     db.commit()
-
     db.refresh(resolution)
     return resolution
+
+
+@router.post("/purge_filesystem")
+def purge_filesystem():
+    """Delete all files from operational directories (done, errors, ingest_input, parsed, processing).
+    Does not touch synthetic_test_pool. Use to reset state between test runs."""
+    deleted = purge_operational_dirs()
+    return {"deleted_total": sum(deleted.values()), "deleted_by_dir": deleted}
+
+
+@router.post("/purge_db")
+def purge_db(db: Session = Depends(get_db)):
+    """Delete all rows from email tables in FK-safe order.
+    Use alongside purge_filesystem for a full reset between test runs."""
+    db.exec(delete(EmailResolution))
+    db.exec(delete(EmailParsed))
+    db.exec(delete(EmailEvent))
+    db.commit()
+    return {"status": "ok", "tables_cleared": ["email_resolution", "email_parsed", "email_events"]}
+
 
 @router.post("/parse")
 async def parse_email(file: UploadFile = File(...)):

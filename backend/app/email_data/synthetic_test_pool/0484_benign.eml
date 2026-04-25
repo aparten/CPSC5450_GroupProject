@@ -1,0 +1,43 @@
+From: Eve Nguyen <eve.nguyen@consulting.co>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Sat, 19 Oct 2024 05:00:00 +0000
+Message-ID: <2754630c-5be8-4c21-9db9-3e684f42954b@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+On Sun, Oct 06, 2002 at 11:10:05PM +0100, Declan de Lacy Murphy wrote:
+> I am planning to get i-stream solo and share it across a small network
+> (wireless), but I don't want to have to pay eircom for a router and having a
+> noisy pc running constantly isn't really an option because at home
+> inevitably someone will unplug it.
+>=20
+> I have been looking at a number of products and although I read the thread
+> about eircom needing pppoe last august I am still not sure if the one that I
+> am interested in will do the job. It is a hawking technology ar 710
+>  http://www.hawkingtech.com/products/ar710.htm ) and if it does the job it
+> will actually be cheaper than the modem eircom is selling.
+>=20
+> I would really appreciate if someone could look at the spec on the hawking
+> web page and give me an opinion.
+>=20
+> Thanks in advance
+>=20
+> Declan
+> I got the DSL-W 906E from http://www.dsl-warehouse.co.uk.Though it's not at=
+ all the best one around I have to say it does the job
+and a bit. Some of the features can be a pain to get working (ie. pptp in
+pppoe mode - can't figure it out). The documentation is not the best, but
+the guys from http://www.dsl-warehouse.co.uk will help you ouit. They
+also have a message board.The command line interface is quite powerful, but a=
+bsolutely not
+userfriendly.All in all it's a cheap desent performer, that I am happy enough=
+ with.
+Got this one including a microfilter (not needed) for 140euro including
+shipping. Better than any deal from Eircom.-Tor
+--=20
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

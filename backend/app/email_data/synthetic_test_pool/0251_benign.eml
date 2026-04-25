@@ -1,0 +1,19 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Thu, 15 Aug 2024 21:00:00 +0000
+Message-ID: <a6c5b201-3fc9-4792-ad57-273840d0da07@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+ > I don't discount any other work like for
+ > example Niall's work on the B.B.C. but maybe
+ > there is general interest in an Irish distro.
+ > Anyone?
+ 
+ I'll bite.-- 
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie

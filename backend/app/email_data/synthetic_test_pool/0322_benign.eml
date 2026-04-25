@@ -1,0 +1,20 @@
+From: Carol Lee <carol.lee@nonprofit.org>
+To: security-team@soc.internal
+Subject: FYI: Updated policy document attached
+Date: Sun, 29 Dec 2024 13:00:00 +0000
+Message-ID: <642bcacc-454f-411e-9aa4-e7594c488abd@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+jm@jmason.org (Justin Mason) writes:> except for 1 thing: defanged MIME messa=
+ges.  that's a big problem.
+> but if you didn't just *remove* the headers and instead reverted
+> back to the X-Spam-Prev versions, it'd more-or-less work.
+>=20
+> (BTW fixed the downloads page ;)&check now un-defangs MIME -- it was screwi=
+ng up some of my mass-check
+results (where SA-markup was present, yes).If there ever was a warning about =
+SA-markup in mass-check, it never
+worked for me.Dan

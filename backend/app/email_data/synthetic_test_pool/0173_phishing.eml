@@ -1,0 +1,11 @@
+From: Microsoft Support <support@micros0ft-alerts.org>
+To: inbox@phish-trap.internal
+Subject: Suspicious login detected on your account
+Date: Fri, 14 Jun 2024 15:00:00 +0000
+Message-ID: <4fc409e8-9dc1-4e8c-99d7-fc2382ae765c@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+empty

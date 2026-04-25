@@ -1,0 +1,11 @@
+From: IT Helpdesk <helpdesk@corp-support-desk.net>
+To: security-team@soc.internal
+Subject: Action required: Your password will expire
+Date: Mon, 09 Sep 2024 05:00:00 +0000
+Message-ID: <6432c9ce-2f76-4161-8eb4-3553e08bc26c@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+empty

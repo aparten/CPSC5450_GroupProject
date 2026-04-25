@@ -1,0 +1,20 @@
+From: Dave Kim <dave.kim@startup.io>
+To: inbox@phish-trap.internal
+Subject: Welcome to the team!
+Date: Thu, 04 Apr 2024 01:00:00 +0000
+Message-ID: <9c86129e-99b4-41c9-aed1-375fa5dd64bc@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+    Date:        Fri, 23 Aug 2002 02:05:19 +0700
+    From:        Robert Elz=20
+    Message-ID:  <16323.1030043119@munnari.OZ.AU>When I said ...  | This is f=
+rom today's cvsthat will translate as  "yesterday's" now of course (before th=
+e most
+recent set of changes (catchup speedups, and so on)).kre_____________________=
+__________________________
+Exmh-workers mailing list
+Exmh-workers@redhat.com
+https://listman.redhat.com/mailman/listinfo/exmh-workers

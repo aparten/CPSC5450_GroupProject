@@ -82,3 +82,16 @@ export function logout() {
   clearToken()
   window.location.href = '/auth/login'
 }
+
+export async function ingestInbox(): Promise<{ queued_count: number; failed_count: number; remaining_count: number }> {
+  const token = getToken()
+  const res = await fetch(`${API_BASE}/email/ingest/inbox`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) {
+    const detail = await res.json().catch(() => null)
+    throw new Error(detail?.detail ?? 'Ingestion failed')
+  }
+  return res.json()
+}

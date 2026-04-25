@@ -1,5 +1,5 @@
 import { ClientOnly, createFileRoute } from '@tanstack/react-router'
-import { requireAuth } from '@/lib/auth'
+import { requireAuth, ingestInbox } from '@/lib/auth'
 import { useMemo, useState } from 'react'
 import { Alert, Box, Center, Container, Grid, Loader, Stack, Tabs } from '@mantine/core'
 import { DashboardHeader } from '@/features/dashboard/DashboardHeader'
@@ -22,8 +22,21 @@ function RouteComponent() {
   const [note, setNote] = useState('')
   const [mobileTab, setMobileTab] = useState<string>('queue')
   const [historyByCase, setHistoryByCase] = useState<Record<string, DecisionEntry[]>>({})
+  const [isProcessing, setIsProcessing] = useState(false)
 
-  const { queue, setQueue, loading, error } = useEmailQueue()
+  const { queue, setQueue, loading, error, hasPending, refresh } = useEmailQueue()
+
+  const queueIsProcessing = isProcessing || hasPending
+
+  const handleProcessEmails = async () => {
+    setIsProcessing(true)
+    try {
+      await ingestInbox()
+      refresh()
+    } finally {
+      setIsProcessing(false)
+    }
+  }
 
   const filteredQueue = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -84,14 +97,18 @@ function RouteComponent() {
       fallback={
         <Container size="xl" py="xl">
           <Stack gap="lg">
-            <DashboardHeader queue={[]} />
+            <DashboardHeader queue={[]} onProcessEmails={() => {}} isProcessing={false} />
           </Stack>
         </Container>
       }
     >
       <Container size="xl" py="xl">
         <Stack gap="lg">
-          <DashboardHeader queue={filteredQueue} />
+          <DashboardHeader
+            queue={filteredQueue}
+            onProcessEmails={handleProcessEmails}
+            isProcessing={isProcessing}
+          />
 
           {error && (
             <Alert color="red" title="Error loading queue" variant="light">
@@ -125,6 +142,7 @@ function RouteComponent() {
                         setMobileTab('case')
                       }}
                       onResetFilters={resetFilters}
+                      isProcessing={queueIsProcessing}
                     />
                   </Tabs.Panel>
 
@@ -151,6 +169,7 @@ function RouteComponent() {
                     selectedId={effectiveSelectedId}
                     onSelect={setSelectedId}
                     onResetFilters={resetFilters}
+                    isProcessing={queueIsProcessing}
                   />
                 </Grid.Col>
 

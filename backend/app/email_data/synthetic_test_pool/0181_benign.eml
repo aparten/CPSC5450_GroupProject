@@ -1,0 +1,20 @@
+From: Bob Martinez <bob.martinez@company.com>
+To: security-team@soc.internal
+Subject: Project update for Q181
+Date: Thu, 24 Oct 2024 22:00:00 +0000
+Message-ID: <4c0e8640-ffdb-4a19-b0d1-fcd252017d27@synthetic.test>
+Authentication-Results: synthetic.test; spf=none; dkim=none; dmarc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Mornin' all,
+	I'm running one of the development snapshots of putty, and i just
+noticed a very handy new feature: builtin proxy support. This means that
+people like me can connect to external hosts using ssh via a http proxy.
+Nitfy.Steve
+-- 
+"Oh look, it's the Pigeon of Love."-- 
+Irish Linux Users' Group: ilug@linux.ie
+http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information.
+List maintainer: listmaster@linux.ie
